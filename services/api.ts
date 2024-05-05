@@ -29,7 +29,7 @@ export class ApiService {
 
     static async testConnection() {
         const headers = new Headers();
-        headers.append('Access-Control-Allow-Origin', 'https://ituai.club');
+        headers.append('Access-Control-Allow-Origin', '*');
         headers.append('Content-Type', 'application/json');
         const response = await ApiService.fetchData('', 'GET', null, headers);
         return response.json();
@@ -38,7 +38,7 @@ export class ApiService {
 
     static async testAiConnection() {
         const headers = new Headers();
-        headers.append('Access-Control-Allow-Origin', 'https://ituai.club');
+        headers.append('Access-Control-Allow-Origin', '*');
         headers.append('Content-Type', 'application/json');
         const response = await ApiService.fetchData('editor/test', 'GET', null, headers);
         return response.json();
@@ -47,7 +47,7 @@ export class ApiService {
 
     static async sendImageRequest(imageFile: File, promptData: PromptData) {
         const headers = new Headers();
-        headers.append('Access-Control-Allow-Origin', 'https://ituai.club');
+        headers.append('Access-Control-Allow-Origin', '*');
         const body = new FormData();
         body.append('image', imageFile);
         body.append('prompt', promptData.prompt);
@@ -61,7 +61,7 @@ export class ApiService {
 
     static async getImageRequest(imageId: string, imageType: "raw" | "edited", isFramed: boolean) {
         const headers = new Headers();
-        headers.append('Access-Control-Allow-Origin', 'https://ituai.club');
+        headers.append('Access-Control-Allow-Origin', '*');
         headers.append('Content-Type', 'application/json');
         const rawImageResponse = await ApiService.fetchData(`storage/get/${imageId}/${imageType}/${isFramed}`, 'GET', null, headers);
         return rawImageResponse.text();
