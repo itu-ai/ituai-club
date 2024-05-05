@@ -2,32 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+html {
+  color-scheme: dark;
+}
+
+.ai-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  size: cover;
+  background-image: url('/summit/background.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+}
+
+.general-bg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+}
+
+@font-face {
+  font-family: 'starjedi';
+  src: url('/fonts/starjedi.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'starout';
+  src: url('/fonts/starout.ttf') format('truetype');
+}
+
+.sw-frame {
+  border-width: 4px;
+  border-style: solid;
+  border-image: linear-gradient(rgb(251, 191, 36), rgb(245, 191, 51)) 1;
+  object-fit: cover;
+  height: 100%;
+  aspect-ratio: 1/1;
+  @apply w-[24rem] lg:w-[36rem] mt-28 lg:mt-0
+}
+
+.sw-button {
+  @apply w-48 outline-none font-starjedi bg-black border-2 border-yellow-400 text-yellow-400 rounded-sm hover:bg-yellow-400 hover:text-black transition-colors
+}
+
+.sw-button:disabled {
+  @apply bg-gray-900 text-yellow-800 border-yellow-800
+}
+
+.sw-jedi-button {
+  @apply outline-none font-starjedi bg-black border-2 border-blue-400 text-blue-400 rounded-sm hover:bg-blue-400 hover:text-black transition-colors
+}
+
+.sw-sith-button {
+  @apply outline-none font-starjedi bg-black border-2 border-red-400 text-red-400 rounded-sm hover:bg-red-400 hover:text-black transition-colors
 }
