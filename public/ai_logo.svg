@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="katman_1" data-name="katman 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 425.81 425.87">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-2 {
+        font-family: Araboto-Black, Araboto-Black;
+        font-size: 23.98px;
+        font-weight: 800;
+      }
+
+      .cls-3 {
+        fill: url(#Adsız_degrade_14);
+      }
+    </style>
+    <linearGradient id="Adsız_degrade_14" data-name="Adsız degrade 14" x1="64.61" y1="207.62" x2="324.98" y2="207.62" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#384696"/>
+      <stop offset="1" stop-color="#b13140"/>
+    </linearGradient>
+  </defs>
+  <g id="beyazcizgiler">
+    <g>
+      <g>
+        <path class="cls-1" d="m104.71,10.63c0,5.87-4.76,10.63-10.63,10.63H21.26v72.74c0,5.87-4.76,10.63-10.63,10.63S0,99.88,0,94V0h94.08c5.87,0,10.63,4.76,10.63,10.63Z"/>
+        <g>
+          <rect class="cls-1" x="119.13" y="8.25" width="25.95" height="4.69"/>
+          <rect class="cls-1" x="159.31" y="8.25" width="25.95" height="4.69"/>
+        </g>
+        <g>
+          <rect class="cls-1" x="-2.39" y="169.9" width="25.95" height="4.69" transform="translate(-161.66 182.83) rotate(-90)"/>
+          <rect class="cls-1" x="-2.39" y="129.72" width="25.95" height="4.69" transform="translate(-121.48 142.65) rotate(-90)"/>
+        </g>
+      </g>
+      <g>
+        <path class="cls-1" d="m10.7,320.82c5.87,0,10.63,4.76,10.63,10.63v72.82s72.74,0,72.74,0c5.87,0,10.63,4.76,10.63,10.63,0,5.87-4.76,10.63-10.63,10.63H.07v-94.08c0-5.87,4.76-10.63,10.63-10.63Z"/>
+        <g>
+          <rect class="cls-1" x="-2.32" y="291.08" width="25.95" height="4.69" transform="translate(-282.77 304.09) rotate(-90)"/>
+          <rect class="cls-1" x="-2.32" y="250.91" width="25.95" height="4.69" transform="translate(-242.59 263.91) rotate(-90)"/>
+        </g>
+        <g>
+          <rect class="cls-1" x="159.33" y="412.61" width="25.95" height="4.69" transform="translate(344.62 829.9) rotate(-180)"/>
+          <rect class="cls-1" x="119.16" y="412.61" width="25.95" height="4.69" transform="translate(264.27 829.9) rotate(-180)"/>
+        </g>
+      </g>
+    </g>
+    <g>
+      <g>
+        <path class="cls-1" d="m321.1,10.97c0,5.87,4.76,10.63,10.63,10.63h72.82v72.74c0,5.87,4.76,10.63,10.63,10.63,5.87,0,10.63-4.76,10.63-10.63V.34s-94.08,0-94.08,0c-5.87,0-10.63,4.76-10.63,10.63Z"/>
+        <g>
+          <rect class="cls-1" x="280.73" y="8.58" width="25.95" height="4.69" transform="translate(587.41 21.85) rotate(-180)"/>
+          <rect class="cls-1" x="240.55" y="8.58" width="25.95" height="4.69" transform="translate(507.06 21.85) rotate(-180)"/>
+        </g>
+        <g>
+          <rect class="cls-1" x="402.25" y="170.24" width="25.95" height="4.69" transform="translate(242.65 587.81) rotate(-90)"/>
+          <rect class="cls-1" x="402.25" y="130.06" width="25.95" height="4.69" transform="translate(282.83 547.63) rotate(-90)"/>
+        </g>
+      </g>
+      <g>
+        <path class="cls-1" d="m415.12,321.16c-5.87,0-10.63,4.76-10.63,10.63v72.82h-72.74c-5.87,0-10.63,4.76-10.63,10.63s4.76,10.63,10.63,10.63h94v-94.08c0-5.87-4.76-10.63-10.63-10.63Z"/>
+        <g>
+          <rect class="cls-1" x="402.18" y="291.42" width="25.95" height="4.69" transform="translate(121.39 708.92) rotate(-90)"/>
+          <rect class="cls-1" x="402.18" y="251.24" width="25.95" height="4.69" transform="translate(161.57 668.74) rotate(-90)"/>
+        </g>
+        <g>
+          <rect class="cls-1" x="240.53" y="412.94" width="25.95" height="4.69"/>
+          <rect class="cls-1" x="280.71" y="412.94" width="25.95" height="4.69"/>
+        </g>
+      </g>
+    </g>
+    <g>
+      <polygon class="cls-1" points="65.61 210.39 65.61 215.07 12.92 215.07 12.92 225.71 8.24 225.71 8.24 199.76 12.92 199.76 12.92 210.39 65.61 210.39"/>
+      <polygon class="cls-1" points="360.12 210.39 360.12 215.07 412.81 215.07 412.81 225.71 417.5 225.71 417.5 199.76 412.81 199.76 412.81 210.39 360.12 210.39"/>
+      <polygon class="cls-1" points="210.52 365.46 215.21 365.46 215.21 412.68 225.85 412.68 225.84 417.37 199.89 417.37 199.9 412.68 210.52 412.68 210.52 365.46"/>
+      <polygon class="cls-1" points="210.56 60.15 215.25 60.15 215.25 12.93 225.89 12.93 225.88 8.25 199.93 8.25 199.93 12.93 210.56 12.93 210.56 60.15"/>
+    </g>
+  </g>
+  <text class="cls-2" transform="translate(96.89 326.1)"><tspan x="0" y="0">ITU Student Chapter</tspan></text>
+  <path id="logo" class="cls-3" d="m87.77,250.87c15.02-24.66,30.04-49.31,45.06-73.97m0,0c-15.02,24.66-53.21,87.34-68.23,112h46.32c15.02-24.66,30.04-49.31,45.06-73.97l-23.15-38.03Zm0,0c-15.02,24.66-53.21,87.34-68.23,112h46.32c15.02-24.66,30.04-49.31,45.06-73.97l-23.15-38.03Zm0,0c-15.02,24.66-53.21,87.34-68.23,112h46.32c15.02-24.66,30.04-49.31,45.06-73.97l-23.15-38.03Zm7.65-12.64c15.02,24.66,60.54,99.98,75.56,124.63h46.32c-15.02-24.66-83.71-138.01-98.73-162.67l-23.15,38.03Zm145.17,124.73h39.33v-82.39l-39.33-39.33v121.72Zm39.33-159.76h-39.33s0,19.66,0,19.66l39.33,39.33v-58.99Z"/>
+</svg>
