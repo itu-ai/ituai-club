@@ -7,6 +7,7 @@ interface AdminPromptSelectionProps {
 }
 
 const AdminPromptSelection: React.FC<AdminPromptSelectionProps> = ({confirmSelectionCallback, goBackCallback}) => {
+  const [selectedPrompt, setSelectedPrompt] = useState<number | undefined>(undefined);
   const [promptText, setPromptText] = useState<string>("");
   const [cfgScale, setCfgScale] = useState<number>(7);
   const [strength, setStrength] = useState<number>(0.5);
@@ -14,15 +15,24 @@ const AdminPromptSelection: React.FC<AdminPromptSelectionProps> = ({confirmSelec
   useEffect(() => {
     const storedPrompt = localStorage.getItem("prompt") || "";
     setPromptText(storedPrompt);
-    document.getElementById("prompt-text")?.setAttribute("value", storedPrompt);
     const storedCfgScale = localStorage.getItem("cfgScale") || "7";
     setCfgScale(parseInt(storedCfgScale));
+    document.getElementById("cfg-scale-slider")?.setAttribute("value", storedCfgScale);
     const storedStrength = localStorage.getItem("strength") || "0.5";
     setStrength(parseFloat(storedStrength));
+    document.getElementById("strength-slider")?.setAttribute("value", storedStrength);
   }, []);
 
   const handlePromptTextChanged = (element: React.ChangeEvent<HTMLInputElement>) => {
     setPromptText(element.target.value);
+  }
+
+  const handleCfgScaleChanged = (element: React.ChangeEvent<HTMLInputElement>) => {
+    setCfgScale(parseInt(element.target.value));
+  }
+
+  const handleStrengthChanged = (element: React.ChangeEvent<HTMLInputElement>) => {
+    setStrength(parseFloat(element.target.value));
   }
 
   const confirmSelection = async () => {
@@ -50,8 +60,7 @@ const AdminPromptSelection: React.FC<AdminPromptSelectionProps> = ({confirmSelec
           <p className="font-semibold">
             Prompt Text:
           </p>
-          <input className="w-full outline-none"
-            id="prompt-text"
+          <input className="w-full outline-none" 
             onChange={handlePromptTextChanged}>
           </input>
         </div>
@@ -64,12 +73,13 @@ const AdminPromptSelection: React.FC<AdminPromptSelectionProps> = ({confirmSelec
               0
             </p>
               <input className="w-full outline-none"
+                    id="cfg-scale-slider"
                     type="range" 
                     min={0} 
                     max={35} 
                     step={1} 
                     defaultValue={7}
-                    value={cfgScale}/>
+                    onChange={handleCfgScaleChanged}/>
             <p id="slider-output-cfg" className="ml-2 text-xs md:text-sm">
               {cfgScale}
             </p>
@@ -84,12 +94,13 @@ const AdminPromptSelection: React.FC<AdminPromptSelectionProps> = ({confirmSelec
               0
             </p>
               <input className="w-full outline-none"
+                    id="strength-slider"
                     type="range" 
                     min={0} 
                     max={1} 
                     step={0.01} 
                     defaultValue={0.5} 
-                    value={strength}/>
+                    onChange={handleStrengthChanged}/>
             <p id="slider-output-strength" className="ml-2 text-xs md:text-sm">
               {strength}
             </p>

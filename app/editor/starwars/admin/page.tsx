@@ -8,7 +8,7 @@ export default function Home() {
         <img src="/ai_logo.svg" alt="Logo" />
       </div>
       <h1 className="absolute top-8 text-center mx-12 text-3xl lg:text-6xl font-starout text-yellow-400">
-        Enter the Star Wars universe
+        Admin Testing Page
       </h1>
       <AdminAIPrompter/>
     </div>
