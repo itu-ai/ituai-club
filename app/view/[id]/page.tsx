@@ -81,7 +81,7 @@ const PhotoPage = ( {params}: Props) => {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row gap-8 items-center justify-center w-screen h-screen p-8">
+    <div className="flex flex-col lg:flex-row gap-8 items-center justify-center p-8">
       {(rawImage64 && editedImage64 ) 
       ?
         <>
@@ -127,7 +127,7 @@ const PhotoPage = ( {params}: Props) => {
           </div>
         </>
       :
-        <div className="">
+        <div>
           <LoadingLayer />
         </div>
       }
