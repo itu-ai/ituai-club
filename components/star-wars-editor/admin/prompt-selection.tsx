@@ -122,8 +122,7 @@ const PromptSelection: React.FC<PromptSelectionProps> = ({confirmSelectionCallba
           Go Back
         </button>
         <button className="sw-button px-6 py-2" 
-          onClick={confirmSelection}
-          disabled={selectedPrompt === undefined}>
+          onClick={confirmSelection}>
           Enter
         </button>
       </div>
