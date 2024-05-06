@@ -15,14 +15,15 @@ const Capture: React.FC<CaptureProps> = ({ confirmCaptureCallback }) => {
 
 
   useEffect(() => {
-    console.log(typeof confirmCaptureCallback);
-    handleOnPageLoad();
+    setLoaded(true);
+    setTimeout(() => {
+      handleOnPageLoad();
+    }, 100);
   }, []);
 
   const handleOnPageLoad = async () => {
-    console.log('page loaded');
     setImage(undefined);
-    startCamera().then(() => { setLoaded(true); });
+    startCamera();
   }
 
   const startCamera = async () => {
@@ -30,8 +31,10 @@ const Capture: React.FC<CaptureProps> = ({ confirmCaptureCallback }) => {
       const mediaStream = await navigator.mediaDevices.getUserMedia({ video: true });
       setStream(mediaStream);
       if (videoRef.current) {
-        console.log('setting stream');
         videoRef.current.srcObject = mediaStream;
+      }
+      else {
+
       }
     } 
     catch (err) {
@@ -68,8 +71,6 @@ const Capture: React.FC<CaptureProps> = ({ confirmCaptureCallback }) => {
 
   const confirmImage = () => {
     if (image) {
-      console.log(confirmCaptureCallback);
-      console.log(typeof confirmCaptureCallback);
       confirmCaptureCallback(image);
     }
   }
