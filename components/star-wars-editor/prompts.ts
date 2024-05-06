@@ -50,7 +50,7 @@ export const PresetList = [
 
 const jediPrompt: PromptData = {
   title: "Jedi Master",
-  prompt: "In Star Wars universe, an epic scene of a brave Jedi Master",
+  prompt: "In Star Wars universe, an epic scene of a brave Star Wars Character Jedi Master",
   strength: 0.5,
   style_preset: "cinematic",
   cfg_scale: 7
@@ -58,7 +58,7 @@ const jediPrompt: PromptData = {
 
 const sithLordPrompt: PromptData = {
   title: "Sith Lord",
-  prompt: "In Star Wars universe, an epic scene of a rageful Sith Lord",
+  prompt: "In Star Wars universe, an epic scene of a rageful Star Wars Character Sith Lord",
   strength: 0.5,
   style_preset: "cinematic",
   cfg_scale: 7
