@@ -1,30 +1,24 @@
 import { useState, useEffect } from 'react';
 import { allPrompts, PromptData } from '../prompts';
 
-interface PromptSelectionProps {
+interface AdminPromptSelectionProps {
   confirmSelectionCallback: (prompt: PromptData) => Promise<void>;
   goBackCallback: () => void;
 }
 
-const PromptSelection: React.FC<PromptSelectionProps> = ({confirmSelectionCallback, goBackCallback}) => {
+const AdminPromptSelection: React.FC<AdminPromptSelectionProps> = ({confirmSelectionCallback, goBackCallback}) => {
   const [selectedPrompt, setSelectedPrompt] = useState<number | undefined>(undefined);
   const [promptText, setPromptText] = useState<string>("");
   const [cfgScale, setCfgScale] = useState<number>(7);
   const [strength, setStrength] = useState<number>(0.5);
 
   useEffect(() => {
-    const storedPrompt = localStorage.getItem("prompt");
-    if (storedPrompt) {
-      setPromptText(storedPrompt);
-    }
-    const storedCfgScale = localStorage.getItem("cfgScale");
-    if (storedCfgScale) {
-      setCfgScale(parseInt(storedCfgScale));
-    }
-    const storedStrength = localStorage.getItem("strength");
-    if (storedStrength) {
-      setStrength(parseFloat(storedStrength));
-    }
+    const storedPrompt = localStorage.getItem("prompt") || "";
+    setPromptText(storedPrompt);
+    const storedCfgScale = localStorage.getItem("cfgScale") || "7";
+    setCfgScale(parseInt(storedCfgScale));
+    const storedStrength = localStorage.getItem("strength") || "0.5";
+    setStrength(parseFloat(storedStrength));
   }, []);
 
   const handlePromptTextChanged = (element: React.ChangeEvent<HTMLInputElement>) => {
@@ -130,4 +124,4 @@ const PromptSelection: React.FC<PromptSelectionProps> = ({confirmSelectionCallba
   );
 }
 
-export default PromptSelection;
+export default AdminPromptSelection;

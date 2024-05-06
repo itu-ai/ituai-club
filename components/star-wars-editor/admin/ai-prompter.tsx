@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Capture from '../capture';
-import PromptSelection from './prompt-selection';
+import AdminPromptSelection from './prompt-selection';
 import ImageToOutput from '../image-to-output';
 import { PromptData } from '../prompts';
 
@@ -46,7 +46,7 @@ const AdminAIPrompter: React.FC = () => {
           <Capture confirmCaptureCallback={confirmImageCallback} />
         }
         {state === AIPrompterState.SELECT_PROMPT && 
-          <PromptSelection confirmSelectionCallback={confirmPromptCallback} goBackCallback={goBackToCapture} />
+          <AdminPromptSelection confirmSelectionCallback={confirmPromptCallback} goBackCallback={goBackToCapture} />
         }
         {state === AIPrompterState.OUTPUT && image && selectedPrompt &&
           <ImageToOutput rawImage={image} promptData={selectedPrompt} restartCallback={restartCallback}/>
