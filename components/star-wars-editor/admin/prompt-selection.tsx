@@ -13,15 +13,21 @@ const AdminPromptSelection: React.FC<AdminPromptSelectionProps> = ({confirmSelec
   const [strength, setStrength] = useState<number>(0.5);
 
   useEffect(() => {
-    const storedPrompt = localStorage.getItem("prompt") || "";
-    setPromptText(storedPrompt);
-    const storedCfgScale = localStorage.getItem("cfgScale") || "7";
-    setCfgScale(parseInt(storedCfgScale));
-    document.getElementById("cfg-scale-slider")?.setAttribute("value", storedCfgScale);
-    const storedStrength = localStorage.getItem("strength") || "0.5";
-    setStrength(parseFloat(storedStrength));
-    document.getElementById("strength-slider")?.setAttribute("value", storedStrength);
+    const loadLocal = async () => {
+      const storedPrompt = localStorage.getItem("prompt") || "";
+      setPromptText(storedPrompt);
+      document.getElementById("prompt-text-input")?.setAttribute("value", storedPrompt);
+      const storedCfgScale = localStorage.getItem("cfgScale") || "7";
+      setCfgScale(parseInt(storedCfgScale));
+      document.getElementById("cfg-scale-slider")?.setAttribute("value", storedCfgScale);
+      const storedStrength = localStorage.getItem("strength") || "0.5";
+      setStrength(parseFloat(storedStrength));
+      document.getElementById("strength-slider")?.setAttribute("value", storedStrength);
+    }
+    setTimeout(loadLocal, 100);
   }, []);
+
+
 
   const handlePromptTextChanged = (element: React.ChangeEvent<HTMLInputElement>) => {
     setPromptText(element.target.value);
@@ -55,12 +61,14 @@ const AdminPromptSelection: React.FC<AdminPromptSelectionProps> = ({confirmSelec
         Choose Your Side
       </h2>
       {/* This part is not included in the original code. */}
-      <div className="flex mb-8 gap-4">
+      <div className="flex flex-col mb-8 gap-4">
         <div className="flex">
           <p className="font-semibold">
             Prompt Text:
           </p>
-          <input className="w-full outline-none" 
+          <input className="w-full outline-none"
+            id="prompt-text-input"
+            type="text"
             onChange={handlePromptTextChanged}>
           </input>
         </div>
