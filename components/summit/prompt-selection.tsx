@@ -8,9 +8,9 @@ interface PromptSelectionProps {
 }
 
 const PromptSelection: React.FC<PromptSelectionProps> = ({confirmSelectionCallback, goBackCallback}) => {
-  const [selectedPrompt, setSelectedPrompt] = useState<number | undefined>(undefined);
-  const [beforeImage, setBeforeImage] = useState<string | undefined>(undefined);
-  const [afterImage, setAfterImage] = useState<string | undefined>(undefined);
+  const [selectedPrompt, setSelectedPrompt] = useState<number | undefined>(0);
+  const [beforeImage, setBeforeImage] = useState<string | undefined>(allPrompts[0].beforeImage);
+  const [afterImage, setAfterImage] = useState<string | undefined>(allPrompts[0].afterImage);
 
   const selectPrompt = async (index: number) => {
     setSelectedPrompt(index);
