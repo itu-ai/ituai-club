@@ -40,7 +40,7 @@ const AIPrompter: React.FC = () => {
   }
 
   return (
-    <div className="">
+    <div className="px-4 lg:px-0 py-12">
       <div className="">
         {state === AIPrompterState.CAPTURE && 
           <Capture confirmCaptureCallback={confirmImageCallback} />

@@ -77,7 +77,7 @@ const Capture: React.FC<CaptureProps> = ({ confirmCaptureCallback }) => {
 
 
   return (
-    <div className="">
+    <div>
       { image
         ? 
         <>

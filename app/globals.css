@@ -55,10 +55,7 @@ html {
   border-width: 4px;
   border-style: solid;
   border-image: linear-gradient(rgb(251, 191, 36), rgb(245, 191, 51)) 1;
-  object-fit: cover;
-  height: 100%;
-  aspect-ratio: 1/1;
-  @apply w-[24rem] lg:w-[36rem] mt-28 lg:mt-0
+  @apply w-full lg:w-[36rem]
 }
 
 .sw-button {
