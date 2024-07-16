@@ -12,6 +12,44 @@ html {
   color-scheme: dark;
 }
 
+.summit-bg {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  size: cover;
+  background-image: url('/summit/background.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+}
+
+.summit-font {
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+
+.summit-frame {
+  border-width: 4px;
+  border-style: solid;
+  border-image: linear-gradient(rgb(59, 69, 148), rgb(175, 49, 65)) 1;
+  @apply w-full lg:w-[36rem]
+}
+
+.summit-button {
+  @apply min-w-48 outline-none font-bold text-lg bg-black border-2 border-red-500 text-red-500 rounded-sm hover:bg-red-500 hover:text-black transition-colors
+}
+
+.summit-button:disabled {
+  @apply bg-gray-900 text-red-800 border-red-800
+}
+
+.summit-selection-button {
+
+}
+
 .ai-bg {
   position: absolute;
   top: 50%;
@@ -26,6 +64,8 @@ html {
   background-size: cover;
   z-index: -1;
 }
+
+
 
 .general-bg {
   position: fixed;
@@ -73,3 +113,4 @@ html {
 .sw-sith-button {
   @apply outline-none font-starjedi bg-black border-2 border-red-400 text-red-400 rounded-sm hover:bg-red-400 hover:text-black transition-colors
 }
+
