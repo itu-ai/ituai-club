@@ -97,7 +97,12 @@ const Capture: React.FC<CaptureProps> = ({ confirmCaptureCallback }) => {
         <>
           {loaded &&
             <>
-              <video className="sw-frame" autoPlay ref={videoRef}/>
+              <video className="sw-frame"
+                autoPlay
+                ref={videoRef}
+                playsInline
+                controls={false}
+              />
               <div className="flex flex-col mt-4 lg:flex-row items-center justify-center gap-4 lg:gap-6">
                 <button className="sw-button px-6 py-2" 
                 onClick={takeSnapshot}>
