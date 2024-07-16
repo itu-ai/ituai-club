@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { allPrompts, PromptData } from './prompts';
+import { allPrompts } from './prompts';
+import { PromptData } from '@/interfaces/prompt_data';
 
 interface PromptSelectionProps {
   confirmSelectionCallback: (prompt: PromptData) => Promise<void>;

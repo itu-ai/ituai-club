@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import Capture from '../capture';
 import AdminPromptSelection from './prompt-selection';
 import ImageToOutput from '../image-to-output';
-import { PromptData } from '../prompts';
+import { PromptData } from '@/interfaces/prompt_data';
 
 enum AIPrompterState {
   CAPTURE,

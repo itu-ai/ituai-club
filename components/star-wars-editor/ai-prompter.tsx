@@ -1,10 +1,10 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import Capture from './capture';
 import PromptSelection from './prompt-selection';
 import ImageToOutput from './image-to-output';
-import { PromptData } from './prompts';
+import { PromptData } from "@/interfaces/prompt_data"
 
 enum AIPrompterState {
   CAPTURE,

@@ -75,7 +75,6 @@ const Capture: React.FC<CaptureProps> = ({ confirmCaptureCallback }) => {
     }
   }
 
-
   return (
     <div>
       { image

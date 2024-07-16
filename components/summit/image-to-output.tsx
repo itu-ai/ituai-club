@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { PromptData } from './prompts';
+import { PromptData } from "@/interfaces/prompt_data"
 import { ApiService } from '@/services/api';
 import QRCode from 'qrcode.react';
 import LoadingLayer from './loading-layer';

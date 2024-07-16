@@ -1,4 +1,4 @@
-import { PromptData } from "@/components/star-wars-editor/prompts";
+import { PromptData } from "@/interfaces/prompt_data";
 
 export class ApiService {
     static BASE_URL: string = process.env.NEXT_PUBLIC_API_URL as string;
