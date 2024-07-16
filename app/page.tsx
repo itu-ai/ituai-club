@@ -19,7 +19,7 @@ export default function Home() {
             />
           </Link>
           <p className="text-center text-base font-normal text-zinc-300">
-            Image Editor made for AI Summit'24
+            Image Editor made for AI Summit&apos;24
           </p>
         </div>
 
