@@ -56,13 +56,13 @@ export default function TuringTestPage() {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-between min-h-screen overflow-x-hidden">
+      <div className="flex flex-col items-center justify-between min-h-screen overflow-x-hidden px-4 lg:px-0">
         {/* Header */}
         <header className="flex flex-col items-center justify-center w-full">
-          <h1 className="text-center font-semibold text-4xl text-zinc-200 mt-12 mb-4">
+          <h1 className="text-center font-semibold text-2xl lg:text-4xl text-zinc-200 mt-6 lg:mt-12 mb-2 lg:mb-4">
             Image Turing Test
           </h1>
-          <h2 className="text-center font-semibold text-xl text-zinc-200">
+          <h2 className="text-center font-semibold text-base lg:text-xl text-zinc-200">
             Created by AI or Human?
           </h2>
         </header>
@@ -71,10 +71,10 @@ export default function TuringTestPage() {
         <div>
           <div className="flex flex-col items-center justify-center w-full gap-6">
             <div className="flex items-center justify-between w-full">
-              <p className="text-center font-semibold text-lg text-zinc-200">
+              <p className="text-center font-semibold text-base lg:text-lg text-zinc-200">
                 {"Score: " + score}
               </p>
-              <p className="text-center font-semibold text-lg text-zinc-200">
+              <p className="text-center font-semibold text-base lg:text-lg text-zinc-200">
                 {"Highest Score: " + highestScore}
               </p>
             </div>
@@ -93,7 +93,7 @@ export default function TuringTestPage() {
               </>
             }
             <div className="flex flex-col items-center justify-center w-full mt-4">
-              <div className="flex flex-row items-center justify-center w-full mt-4 gap-4">
+              <div className="flex flex-row items-center justify-between w-full mt-4 gap-4">
                 <button className="w-36 py-2 text-white bg-zinc-500 rounded-lg shadow-lg" 
                   onClick={() => handleSelection(true)}
                 >
