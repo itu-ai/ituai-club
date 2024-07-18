@@ -1,3 +1,4 @@
+import { ImageType } from "@/interfaces/image_type";
 import { PromptData } from "@/interfaces/prompt_data";
 
 export class ApiService {
@@ -59,11 +60,11 @@ export class ApiService {
     }
 
 
-    static async getImageRequest(imageId: string, imageType: "raw" | "edited", isFramed: boolean) {
+    static async getImageRequest(imageId: string, imageType: ImageType, isEdited: boolean, isFramed: boolean) {
         const headers = new Headers();
         headers.append('Access-Control-Allow-Origin', '*');
         headers.append('Content-Type', 'application/json');
-        const rawImageResponse = await ApiService.fetchData(`storage/get/${imageId}/${imageType}/${isFramed}`, 'GET', null, headers);
+        const rawImageResponse = await ApiService.fetchData(`storage/get/${imageId}/${imageType}/${isEdited}/${isFramed}`, 'GET', null, headers);
         return rawImageResponse.text();
     }
 
