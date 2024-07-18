@@ -15,6 +15,7 @@ export default function TuringTestPage() {
 
 
   const getNewImage = async (): Promise<void> => {
+    setImage("");
     const newImage = await getRandomImage();
     setImage(newImage.image);
     setIsAI(newImage.isAI);
@@ -78,7 +79,7 @@ export default function TuringTestPage() {
                 {"Highest Score: " + highestScore}
               </p>
             </div>
-            {image 
+            {image !== ""
               ?
               <img 
                 src={image} 
