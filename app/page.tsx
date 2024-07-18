@@ -6,7 +6,7 @@ export default function Home() {
       <h1 className="text-center font-semibold text-3xl mt-12 text-zinc-200">
         This website is currently hosting projects of ITU Artificial Intelligence Club
       </h1>
-      <div className="grid grid-cols-2 gap-8">
+      <div className="grid grid-cols-3 gap-8">
 
         <div className="max-w-[24rem]">
           <Link
@@ -35,6 +35,21 @@ export default function Home() {
           </Link>
           <p className="text-center text-base font-normal text-zinc-300">
             Image Editor made for Star Wars Movie Night
+          </p>
+        </div>
+
+        <div className="max-w-[24rem]">
+          <Link
+            href="/turing"
+          >
+            <img
+              src="/turing_test.png"
+              alt="Image Turing Test"
+              className="border-4 mb-4 border-zinc-800 hover:border-zinc-900 duration-400 transition-colors"
+            />
+          </Link>
+          <p className="text-center text-base font-normal text-zinc-300">
+            Simple Image Turing Test
           </p>
         </div>
 
