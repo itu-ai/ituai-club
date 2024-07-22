@@ -34,7 +34,7 @@ const ImageToOutput: React.FC<ImageToOutputProps> = ({rawImage, promptData, rest
       console.log(response);
       const imageUrl = 'data:image/png;base64,' + response.artifacts[0].base64;
       setImageID(response.image_id);
-      setQrUrl(pageUrl + response.image_id);
+      setQrUrl(pageUrl + 'summit24' + response.image_id);
       setShownImage(imageUrl);
       setWaiting(false);
     }

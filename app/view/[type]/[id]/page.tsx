@@ -4,16 +4,19 @@ import { ApiService } from '@/services/api';
 import { useEffect, useState } from 'react';
 import LoadingLayer from '@/components/star-wars-editor/loading-layer';
 import Image from 'next/image';
+import { ImageType } from '@/interfaces/image_type';
 
 
 type Props = {
   params: {
-    id: string;
+    type: ImageType
+    id: string
   };
 };
 
 const PhotoPage = ( {params}: Props) => {
   const id = params.id;
+  const type = params.type.toString();
   const [rawImage64, setRawImage64] = useState<string | undefined>(undefined);
   const [editedImage64, setEditedImage64] = useState<string | undefined>(undefined);
   const [isAbleToShare, setIsAbleToShare] = useState(false);
@@ -28,7 +31,7 @@ const PhotoPage = ( {params}: Props) => {
     );
   }, []);
 
-  const fetchPhotosById = async (id: string) => {
+  const fetchPhotosById = async (id: string, imageType: ImageType) => {
     try {
       console.log("Id in Fetch: ", id);
       const pattern = new RegExp("[a-zA-Z0-9]{10}");
@@ -36,8 +39,8 @@ const PhotoPage = ( {params}: Props) => {
         console.error('Invalid ID: ', id);
         throw new Error('Invalid ID');
       }
-      const requestedEditedImage64 = await ApiService.getImageRequest(id as string, "edited", true);
-      const requestedRawImage64 = await ApiService.getImageRequest(id as string, "raw", true);
+      const requestedEditedImage64 = await ApiService.getImageRequest(id as string, imageType, true, true);
+      const requestedRawImage64 = await ApiService.getImageRequest(id as string, imageType, false, true);
       const editedImageWithMetaData = 'data:image/png;base64,' + requestedEditedImage64;
       const rawImageWithMetaData = 'data:image/png;base64,' + requestedRawImage64;
       setEditedImage64(editedImageWithMetaData);
@@ -134,7 +137,7 @@ const PhotoPage = ( {params}: Props) => {
       <button 
         id='fetchButton' 
         style={{display: 'none'}}
-        onClick={() => fetchPhotosById(id)}>
+        onClick={() => fetchPhotosById(id, type)}>
         Fetch Photos
       </button>
     </div>
