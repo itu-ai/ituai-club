@@ -137,7 +137,7 @@ const PhotoPage = ( {params}: Props) => {
       <button 
         id='fetchButton' 
         style={{display: 'none'}}
-        onClick={() => fetchPhotosById(id, type)}>
+        onClick={() => fetchPhotosById(id, type as ImageType)}>
         Fetch Photos
       </button>
     </div>
