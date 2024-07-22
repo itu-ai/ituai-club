@@ -3,6 +3,7 @@ import { PromptData } from '@/interfaces/prompt_data';
 import { ApiService } from '@/services/api';
 import QRCode from 'qrcode.react';
 import LoadingLayer from './loading-layer';
+import { ImageType } from '@/interfaces/image_type';
 
 interface ImageToOutputProps {
     rawImage: string;
@@ -48,7 +49,7 @@ const ImageToOutput: React.FC<ImageToOutputProps> = ({rawImage, promptData, rest
 
   const downloadImage = async () => {
     if (imageID) {
-      const requestedImage64 = await ApiService.getImageRequest(imageID, "edited", true);
+      const requestedImage64 = await ApiService.getImageRequest(imageID, ImageType.StarWars, true, true);
       const imageWithMetaData = 'data:image/png;base64,' + requestedImage64;
       const link = document.createElement('a');
       link.href = imageWithMetaData;
