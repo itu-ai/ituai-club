@@ -23,14 +23,14 @@ if there is more than 1 piece interconnected island, but if all islands are conn
 if the player has left no pieces, meaning all are captured, the player loses the game
 */
 
-const pawn_directions = [
+const one_move_dirs = [
   { x: 0, y: 1 },
   { x: 0, y: -1 },
   { x: 1, y: 0 },
   { x: -1, y: 0 }
 ];
 
-const knight_directions = [
+const two_move_dirs = [
   { x: 2, y: 0 },
   { x: -2, y: 0 },
   { x: 0, y: 2 },
@@ -103,7 +103,7 @@ export class Grid {
         if (piece) {
           // white pieces
           if (piece === 'P' && this.isWhitesTurn) {
-            for (const direction of pawn_directions) {
+            for (const direction of one_move_dirs) {
               const move_x = i + direction.x;
               const move_y = j + direction.y;
               if (isInGrid(move_x, move_y)) {
@@ -124,7 +124,7 @@ export class Grid {
             }
           }
           else if (piece === 'K' && this.isWhitesTurn) {
-            for (const direction of knight_directions) {
+            for (const direction of two_move_dirs) {
               const move_x = i + direction.x;
               const move_y = j + direction.y;
               if (isInGrid(move_x, move_y)) {
@@ -147,7 +147,7 @@ export class Grid {
           }
           // black pieces
           else if (piece === 'p' && !this.isWhitesTurn) {
-            for (const direction of pawn_directions) {
+            for (const direction of one_move_dirs) {
               const move_x = i + direction.x;
               const move_y = j + direction.y;
               if (isInGrid(move_x, move_y)) {
@@ -168,7 +168,7 @@ export class Grid {
             }
           }
           else if (piece === 'k' && !this.isWhitesTurn) {
-            for (const direction of knight_directions) {
+            for (const direction of two_move_dirs) {
               const move_x = i + direction.x;
               const move_y = j + direction.y;
               if (isInGrid(move_x, move_y)) {
@@ -198,56 +198,55 @@ export class Grid {
     }
   }
 
+  public findIslands(pieces: Tile[]): Tile[][] {
+    const visited = new Set<string>();
+    const islands: Tile[][] = [];
+  
+    function dfs(tile: Tile, island: Tile[]) {
+      const key = `${tile.x},${tile.y}`;
+      if (visited.has(key)) {
+        return;
+      }
+      visited.add(key);
+      island.push(tile);
+  
+      for (const direction of one_move_dirs) {
+        const neighbor = { x: tile.x + direction.x, y: tile.y + direction.y };
+        if (pieces.some(p => p.x === neighbor.x && p.y === neighbor.y)) {
+          dfs(neighbor, island);
+        }
+      }
+    }
+  
+    for (const piece of pieces) {
+      const key = `${piece.x},${piece.y}`;
+      if (!visited.has(key)) {
+        const newIsland: Tile[] = [];
+        dfs(piece, newIsland);
+        islands.push(newIsland);
+      }
+    }
+  
+    return islands;
+  }
+
   public isConnected(pieces: Tile[]) {
     // check if all pieces are connected to each other and at least one of them is connected to the center squares
     // there could be more than one interconnected islands but eventually if all the pieces are connected to the center squares, the player wins
-    const islands = [];
-    const visited = new Array(8).fill(null).map(() => new Array(8).fill(false));
-    for (const piece of pieces) {
-      if (!visited[piece.x][piece.y]) {
-        const island = [];
-        const queue = [piece];
-        while (queue.length > 0) {
-          const current = queue.shift();
-          if (current) {
-            const x = current.x;
-            const y = current.y;
-            if (!visited[x][y]) {
-              visited[x][y] = true;
-              island.push(current);
-              for (const direction of pawn_directions) {
-                const move_x = x + direction.x;
-                const move_y = y + direction.y;
-                if (isInGrid(move_x, move_y) && this._grid[move_x][move_y]) {
-                  queue.push({ x: move_x, y: move_y });
-                }
-              }
-            }
-          }
-        }
-        islands.push(island);
-      }
-    }
-    let isInterconnected = false;
+    const islands = this.findIslands(pieces);
     for (const island of islands) {
-      let connected_to_center = false;
-      for (const piece of island) {
-        for (const center of center_squares) {
-          if (piece.x === center.x && piece.y === center.y) {
-            connected_to_center = true;
-            break;
-          }
-        }
-        if (connected_to_center) {
+      let connectedToCenter = false;
+      for (const tile of island) {
+        if (center_squares.some(center => center.x === tile.x && center.y === tile.y)) {
+          connectedToCenter = true;
           break;
         }
       }
-      if (connected_to_center) {
-        isInterconnected = true;
-        break;
+      if (!connectedToCenter) {
+        return false;
       }
     }
-    return isInterconnected;
+    return true;
   }
 
   public calculateGameState() {
