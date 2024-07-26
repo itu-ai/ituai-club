@@ -50,6 +50,7 @@ export class Grid {
   public isWhitesTurn: boolean = true;
   public isGameOver: boolean = false;
   public winnerSide: "white" | "black" | "draw" | "none" = "none";
+  public moveHistory: Move[] = [];
   
   constructor() {
     this._grid = new Array(8).fill(null).map(() => new Array(8).fill(''));
@@ -297,6 +298,7 @@ export class Grid {
     if (move.capture) {
       this._grid[move.capture.x][move.capture.y] = '';
     }
+    this.moveHistory.push(move);
     this.calculateGameState();
     if (this.isGameOver) {
       // TODO: I do not know if there is anything to do here
