@@ -19,11 +19,11 @@ export default function CezPage() {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-4xl font-bold text-center text-white">
+    <div className="flex flex-col items-center justify-center">
+      <h1 className="text-4xl font-bold text-center text-white mt-4 lg:mt-8">
         Cez
       </h1>
-      <div className="py-4">
+      <div className="py-4 mt-4">
         <CezBoard board_size={board_size} />
       </div>
     </div>

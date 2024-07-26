@@ -23,19 +23,21 @@ if there is more than 1 piece interconnected island, but if all islands are conn
 if the player has left no pieces, meaning all are captured, the player loses the game
 */
 
-const pawn_directions = [
+const one_move_dirs = [
   { x: 0, y: 1 },
   { x: 0, y: -1 },
   { x: 1, y: 0 },
   { x: -1, y: 0 }
 ];
 
-const knight_directions = [
+const two_move_dirs = [
   { x: 2, y: 0 },
   { x: -2, y: 0 },
   { x: 0, y: 2 },
   { x: 0, y: -2 }
 ];
+
+const center_squares = [{ x: 3, y: 3 }, { x: 3, y: 4 }, { x: 4, y: 3 }, { x: 4, y: 4 }];
 
 const isInGrid = (x: number, y: number) => {
   return x >= 0 && x < 8 && y >= 0 && y < 8;
@@ -46,6 +48,9 @@ export class Grid {
   private _grid: string[][];
   public legalMoves: Move[] = [];
   public isWhitesTurn: boolean = true;
+  public isGameOver: boolean = false;
+  public winnerSide: "white" | "black" | "draw" | "none" = "none";
+  public moveHistory: Move[] = [];
   
   constructor() {
     this._grid = new Array(8).fill(null).map(() => new Array(8).fill(''));
@@ -61,6 +66,9 @@ export class Grid {
   }
 
   public setInitialPosition() {
+    this.isGameOver = false;
+    this.winnerSide = "none";
+
     this._grid = new Array(8).fill(null).map(() => new Array(8).fill(''));
 
     this._grid[0][0] = 'k';
@@ -95,14 +103,7 @@ export class Grid {
         if (piece) {
           // white pieces
           if (piece === 'P' && this.isWhitesTurn) {
-            // calculate legal moves for white pawns
-            // for every direction, check if there is a piece in the next square
-            // if there is a piece, check if it is an enemy piece
-            // if it is an enemy piece, check if the next square is empty
-            // if the next square is empty, add the move to legal moves
-            // if the next square is not empty, do not add the move to legal moves
-            // if there is no piece in the next square, add the move to legal moves
-            for (const direction of pawn_directions) {
+            for (const direction of one_move_dirs) {
               const move_x = i + direction.x;
               const move_y = j + direction.y;
               if (isInGrid(move_x, move_y)) {
@@ -123,14 +124,7 @@ export class Grid {
             }
           }
           else if (piece === 'K' && this.isWhitesTurn) {
-            // calculate legal moves for white knights
-            // for every direction, check if there is a piece in 2 squares away
-            // if there is a piece, check if it is an enemy piece
-            // if it is an enemy piece, check if the next square is empty
-            // if the next square is empty, add the move to legal moves
-            // if the next square is not empty, do not add the move to legal moves
-            // if there is no piece in 2 squares away, add the move to legal moves
-            for (const direction of knight_directions) {
+            for (const direction of two_move_dirs) {
               const move_x = i + direction.x;
               const move_y = j + direction.y;
               if (isInGrid(move_x, move_y)) {
@@ -153,14 +147,7 @@ export class Grid {
           }
           // black pieces
           else if (piece === 'p' && !this.isWhitesTurn) {
-            // calculate legal moves for black pawns
-            // for every direction, check if there is a piece in the next square
-            // if there is a piece, check if it is an enemy piece
-            // if it is an enemy piece, check if the next square is empty
-            // if the next square is empty, add the move to legal moves
-            // if the next square is not empty, do not add the move to legal moves
-            // if there is no piece in the next square, add the move to legal moves
-            for (const direction of pawn_directions) {
+            for (const direction of one_move_dirs) {
               const move_x = i + direction.x;
               const move_y = j + direction.y;
               if (isInGrid(move_x, move_y)) {
@@ -181,14 +168,7 @@ export class Grid {
             }
           }
           else if (piece === 'k' && !this.isWhitesTurn) {
-            // calculate legal moves for black knights
-            // for every direction, check if there is a piece in 2 squares away
-            // if there is a piece, check if it is an enemy piece
-            // if it is an enemy piece, check if the next square is empty
-            // if the next square is empty, add the move to legal moves
-            // if the next square is not empty, do not add the move to legal moves
-            // if there is no piece in 2 squares away, add the move to legal moves
-            for (const direction of knight_directions) {
+            for (const direction of two_move_dirs) {
               const move_x = i + direction.x;
               const move_y = j + direction.y;
               if (isInGrid(move_x, move_y)) {
@@ -218,15 +198,113 @@ export class Grid {
     }
   }
 
+  public findIslands(pieces: Tile[]): Tile[][] {
+    const visited = new Set<string>();
+    const islands: Tile[][] = [];
+  
+    function dfs(tile: Tile, island: Tile[]) {
+      const key = `${tile.x},${tile.y}`;
+      if (visited.has(key)) {
+        return;
+      }
+      visited.add(key);
+      island.push(tile);
+  
+      for (const direction of one_move_dirs) {
+        const neighbor = { x: tile.x + direction.x, y: tile.y + direction.y };
+        if (pieces.some(p => p.x === neighbor.x && p.y === neighbor.y)) {
+          dfs(neighbor, island);
+        }
+      }
+    }
+  
+    for (const piece of pieces) {
+      const key = `${piece.x},${piece.y}`;
+      if (!visited.has(key)) {
+        const newIsland: Tile[] = [];
+        dfs(piece, newIsland);
+        islands.push(newIsland);
+      }
+    }
+  
+    return islands;
+  }
+
+  public isConnected(pieces: Tile[]) {
+    // check if all pieces are connected to each other and at least one of them is connected to the center squares
+    // there could be more than one interconnected islands but eventually if all the pieces are connected to the center squares, the player wins
+    const islands = this.findIslands(pieces);
+    for (const island of islands) {
+      let connectedToCenter = false;
+      for (const tile of island) {
+        if (center_squares.some(center => center.x === tile.x && center.y === tile.y)) {
+          connectedToCenter = true;
+          break;
+        }
+      }
+      if (!connectedToCenter) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  public calculateGameState() {
+    const white_pieces = [];
+    const black_pieces = [];
+    for (let i = 0; i < 8; i++) {
+      for (let j = 0; j < 8; j++) {
+        const piece = this._grid[i][j];
+        if (piece) {
+          if (piece === 'P' || piece === 'K') {
+            white_pieces.push({ x: i, y: j });
+          }
+          else if (piece === 'p' || piece === 'k') {
+            black_pieces.push({ x: i, y: j });
+          }
+        }
+      }
+    }
+    if (white_pieces.length === 0) {
+      this.isGameOver = true;
+      this.winnerSide = "black";
+    }
+    else if (black_pieces.length === 0) {
+      this.isGameOver = true;
+      this.winnerSide = "white";
+    }
+    else {
+      const white_connected = this.isConnected(white_pieces);
+      const black_connected = this.isConnected(black_pieces);
+      if (white_connected && black_connected) {
+        this.isGameOver = true;
+        this.winnerSide = "draw";
+      }
+      else if (white_connected) {
+        this.isGameOver = true;
+        this.winnerSide = "white";
+      }
+      else if (black_connected) {
+        this.isGameOver = true;
+        this.winnerSide = "black";
+      }
+    }
+  }
+
   public movePiece(move: Move) {
-    // TODO: implement the movePiece method, considering the capture rules
     this._grid[move.to.x][move.to.y] = this._grid[move.from.x][move.from.y];
     this._grid[move.from.x][move.from.y] = '';
     if (move.capture) {
       this._grid[move.capture.x][move.capture.y] = '';
     }
-
-    this.isWhitesTurn = !this.isWhitesTurn;
-    this.calculateLegalMoves();
+    this.moveHistory.push(move);
+    this.calculateGameState();
+    if (this.isGameOver) {
+      // TODO: I do not know if there is anything to do here
+    }
+    else {
+      this.isWhitesTurn = !this.isWhitesTurn;
+      this.calculateLegalMoves();
+    }
   }
 }
