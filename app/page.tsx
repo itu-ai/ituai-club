@@ -64,7 +64,7 @@ export default function Home() {
             />
           </Link>
           <p className="text-center text-base font-normal text-zinc-300">
-            Chess Variation 'Cez', currently in development
+            Chess Variation &apos;Cez&apos;, currently in development
           </p>
         </div>
 
