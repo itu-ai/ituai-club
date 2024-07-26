@@ -1,9 +1,3 @@
-/*
-Create a chess board wth only knight and pawns located in the initial position.
-The board should be represented as a 2D array.
-The board should be 8x8.
-*/
-
 import { useRef, useState, useEffect } from "react";
 
 import { Grid } from "@/interfaces/cez/grid";
@@ -84,6 +78,7 @@ export const CezBoard: React.FC<Props> = ({ board_size = 720 }) => {
       if (move) {
         grid.movePiece(move);
         selectedPiece = null;
+        
       }
       else {
         selectedPiece = null;

@@ -46,6 +46,8 @@ export class Grid {
   private _grid: string[][];
   public legalMoves: Move[] = [];
   public isWhitesTurn: boolean = true;
+  public isGameOver: boolean = false;
+  public winnerSide: "white" | "black" | "draw" | "none" = "none";
   
   constructor() {
     this._grid = new Array(8).fill(null).map(() => new Array(8).fill(''));
@@ -61,6 +63,9 @@ export class Grid {
   }
 
   public setInitialPosition() {
+    this.isGameOver = false;
+    this.winnerSide = "none";
+
     this._grid = new Array(8).fill(null).map(() => new Array(8).fill(''));
 
     this._grid[0][0] = 'k';
@@ -190,14 +195,65 @@ export class Grid {
     }
   }
 
+  public isConnected(pieces: Tile[]) {
+    return null;
+  }
+
+  public calculateGameState() {
+    const white_pieces = [];
+    const black_pieces = [];
+    for (let i = 0; i < 8; i++) {
+      for (let j = 0; j < 8; j++) {
+        const piece = this._grid[i][j];
+        if (piece) {
+          if (piece === 'P' || piece === 'K') {
+            white_pieces.push({ x: i, y: j });
+          }
+          else if (piece === 'p' || piece === 'k') {
+            black_pieces.push({ x: i, y: j });
+          }
+        }
+      }
+    }
+    if (white_pieces.length === 0) {
+      this.isGameOver = true;
+      this.winnerSide = "black";
+    }
+    else if (black_pieces.length === 0) {
+      this.isGameOver = true;
+      this.winnerSide = "white";
+    }
+    else {
+      const white_connected = this.isConnected(white_pieces);
+      const black_connected = this.isConnected(black_pieces);
+      if (white_connected && black_connected) {
+        this.isGameOver = true;
+        this.winnerSide = "draw";
+      }
+      else if (white_connected) {
+        this.isGameOver = true;
+        this.winnerSide = "white";
+      }
+      else if (black_connected) {
+        this.isGameOver = true;
+        this.winnerSide = "black";
+      }
+    }
+  }
+
   public movePiece(move: Move) {
     this._grid[move.to.x][move.to.y] = this._grid[move.from.x][move.from.y];
     this._grid[move.from.x][move.from.y] = '';
     if (move.capture) {
       this._grid[move.capture.x][move.capture.y] = '';
     }
-
-    this.isWhitesTurn = !this.isWhitesTurn;
-    this.calculateLegalMoves();
+    this.calculateGameState();
+    if (this.isGameOver) {
+      // TODO: I do not know if there is anything to do here
+    }
+    else {
+      this.isWhitesTurn = !this.isWhitesTurn;
+      this.calculateLegalMoves();
+    }
   }
 }
