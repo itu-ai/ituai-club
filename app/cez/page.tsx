@@ -6,13 +6,14 @@ import { CezBoard } from "./board";
 export default function CezPage() {
   const [board_size, setBoardSize] = useState<number>(720);
   useEffect (() => {
-    setBoardSize(window.innerWidth * 0.8);
+    // get minimum of window width and height
+    setBoardSize(Math.min(window.innerWidth, window.innerHeight) * 0.8);
     window.addEventListener('resize', () => {
-      setBoardSize(window.innerWidth * 0.8);
+      setBoardSize(Math.min(window.innerWidth, window.innerHeight) * 0.8);
     });
     return () => {
       window.removeEventListener('resize', () => {
-        setBoardSize(window.innerWidth * 0.8);
+        setBoardSize(Math.min(window.innerWidth, window.innerHeight) * 0.8);
       });
     }
   }, []);
