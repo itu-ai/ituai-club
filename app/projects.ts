@@ -53,7 +53,7 @@ export const projects: Project[] = [
     image_src: "/editor_starwars.png",
     image_alt: "Editor Star Wars",
     description: "Image Editor made for Star Wars Movie Night",
-    developers: [devs.erthium, devs.husseinberg, devs.utkub24],
+    developers: [devs.erthium, devs.utkub24, devs.husseinberg],
   },
   {
     title: "Image Turing Test",
