@@ -53,6 +53,21 @@ export default function Home() {
           </p>
         </div>
 
+        <div className="max-w-[24rem]">
+          <Link
+            href="/cez"
+          >
+            <img
+              src="/cez.png"
+              alt="Image Turing Test"
+              className="border-4 mb-4 border-zinc-800 hover:border-zinc-900 duration-400 transition-colors"
+            />
+          </Link>
+          <p className="text-center text-base font-normal text-zinc-300">
+            Chess Variation 'Cez', currently in development
+          </p>
+        </div>
+
       </div>
       <footer className=" pb-6">
         <p className="text-center text-zinc-500 text-xs lg:text-base">
