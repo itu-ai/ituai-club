@@ -37,6 +37,8 @@ const knight_directions = [
   { x: 0, y: -2 }
 ];
 
+const center_squares = [{ x: 3, y: 3 }, { x: 3, y: 4 }, { x: 4, y: 3 }, { x: 4, y: 4 }];
+
 const isInGrid = (x: number, y: number) => {
   return x >= 0 && x < 8 && y >= 0 && y < 8;
 }
@@ -196,7 +198,55 @@ export class Grid {
   }
 
   public isConnected(pieces: Tile[]) {
-    return null;
+    // check if all pieces are connected to each other and at least one of them is connected to the center squares
+    // there could be more than one interconnected islands but eventually if all the pieces are connected to the center squares, the player wins
+    const islands = [];
+    const visited = new Array(8).fill(null).map(() => new Array(8).fill(false));
+    for (const piece of pieces) {
+      if (!visited[piece.x][piece.y]) {
+        const island = [];
+        const queue = [piece];
+        while (queue.length > 0) {
+          const current = queue.shift();
+          if (current) {
+            const x = current.x;
+            const y = current.y;
+            if (!visited[x][y]) {
+              visited[x][y] = true;
+              island.push(current);
+              for (const direction of pawn_directions) {
+                const move_x = x + direction.x;
+                const move_y = y + direction.y;
+                if (isInGrid(move_x, move_y) && this._grid[move_x][move_y]) {
+                  queue.push({ x: move_x, y: move_y });
+                }
+              }
+            }
+          }
+        }
+        islands.push(island);
+      }
+    }
+    let isInterconnected = false;
+    for (const island of islands) {
+      let connected_to_center = false;
+      for (const piece of island) {
+        for (const center of center_squares) {
+          if (piece.x === center.x && piece.y === center.y) {
+            connected_to_center = true;
+            break;
+          }
+        }
+        if (connected_to_center) {
+          break;
+        }
+      }
+      if (connected_to_center) {
+        isInterconnected = true;
+        break;
+      }
+    }
+    return isInterconnected;
   }
 
   public calculateGameState() {
