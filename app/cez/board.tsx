@@ -79,24 +79,20 @@ export const CezBoard: React.FC<Props> = ({ board_size = 720 }) => {
     const x = Math.floor(e.nativeEvent.offsetX / tile_size);
     const y = Math.floor(e.nativeEvent.offsetY / tile_size);
     const hitTile = grid.grid[x][y];
-    console.log('hit tile:', hitTile);
     if (selectedPiece) {
       const move = grid.legalMoves.find((move: Move) => selectedPiece !== null && move.to.x === x && move.to.y === y && move.from.x === selectedPiece.x && move.from.y === selectedPiece.y);
       if (move) {
         grid.movePiece(move);
-        console.log('moved piece:', hitTile);
         selectedPiece = null;
       }
       else {
         selectedPiece = null;
-        console.log('invalid move');
       }
     }
     else {
       if (hitTile !== '') {
         if (grid.isWhitesTurn === (hitTile === hitTile.toUpperCase())) {
           selectedPiece = { x, y };
-          console.log('selected piece:', hitTile);
         }
       }
       else {

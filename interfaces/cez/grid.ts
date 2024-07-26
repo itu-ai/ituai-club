@@ -95,13 +95,6 @@ export class Grid {
         if (piece) {
           // white pieces
           if (piece === 'P' && this.isWhitesTurn) {
-            // calculate legal moves for white pawns
-            // for every direction, check if there is a piece in the next square
-            // if there is a piece, check if it is an enemy piece
-            // if it is an enemy piece, check if the next square is empty
-            // if the next square is empty, add the move to legal moves
-            // if the next square is not empty, do not add the move to legal moves
-            // if there is no piece in the next square, add the move to legal moves
             for (const direction of pawn_directions) {
               const move_x = i + direction.x;
               const move_y = j + direction.y;
@@ -123,13 +116,6 @@ export class Grid {
             }
           }
           else if (piece === 'K' && this.isWhitesTurn) {
-            // calculate legal moves for white knights
-            // for every direction, check if there is a piece in 2 squares away
-            // if there is a piece, check if it is an enemy piece
-            // if it is an enemy piece, check if the next square is empty
-            // if the next square is empty, add the move to legal moves
-            // if the next square is not empty, do not add the move to legal moves
-            // if there is no piece in 2 squares away, add the move to legal moves
             for (const direction of knight_directions) {
               const move_x = i + direction.x;
               const move_y = j + direction.y;
@@ -153,13 +139,6 @@ export class Grid {
           }
           // black pieces
           else if (piece === 'p' && !this.isWhitesTurn) {
-            // calculate legal moves for black pawns
-            // for every direction, check if there is a piece in the next square
-            // if there is a piece, check if it is an enemy piece
-            // if it is an enemy piece, check if the next square is empty
-            // if the next square is empty, add the move to legal moves
-            // if the next square is not empty, do not add the move to legal moves
-            // if there is no piece in the next square, add the move to legal moves
             for (const direction of pawn_directions) {
               const move_x = i + direction.x;
               const move_y = j + direction.y;
@@ -181,13 +160,6 @@ export class Grid {
             }
           }
           else if (piece === 'k' && !this.isWhitesTurn) {
-            // calculate legal moves for black knights
-            // for every direction, check if there is a piece in 2 squares away
-            // if there is a piece, check if it is an enemy piece
-            // if it is an enemy piece, check if the next square is empty
-            // if the next square is empty, add the move to legal moves
-            // if the next square is not empty, do not add the move to legal moves
-            // if there is no piece in 2 squares away, add the move to legal moves
             for (const direction of knight_directions) {
               const move_x = i + direction.x;
               const move_y = j + direction.y;
@@ -219,7 +191,6 @@ export class Grid {
   }
 
   public movePiece(move: Move) {
-    // TODO: implement the movePiece method, considering the capture rules
     this._grid[move.to.x][move.to.y] = this._grid[move.from.x][move.from.y];
     this._grid[move.from.x][move.from.y] = '';
     if (move.capture) {
