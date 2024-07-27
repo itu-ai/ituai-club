@@ -56,13 +56,13 @@ export default function CezPage() {
             In the game; if any piece can be taken, a capturing move must be performed. If there are multiple captures available, any capturing move can be selected.
           </p>
           <p className="text-base font-normal text-start text-zinc-200 mt-6 lg:mt-6">
-            The "centered islands" rule states that a player can win the game by creating "island"s which are made of pieces that are direct horizontal or vertical neighbors to other pieces in that island. To win, the player must create these  "island"s on the center pieces so that every "island" has at least a piece in the center squares (the d4. d5, e4 and the e5 squares).
+            The "centered islands" rule states that a player can win the game by creating "island"s which are made of pieces that are direct horizontal or vertical neighbors to other pieces in that island. To win, the player must create these  &quot;island&quot;s on the center pieces so that every &quot;island&quot; has at least a piece in the center squares (the d4. d5, e4 and the e5 squares).
           </p>
           <p className="text-base font-normal text-start text-zinc-200 mt-6 lg:mt-6">
             Another way to win the game is to capture all of the opponent pieces.
           </p>
           <p className="text-base font-normal text-start text-zinc-200 mt-6 lg:mt-6">
-            If both players meet the conditions of the "interconnected islands" rule at the same time, the game ends in a draw. If any position is repeated 3 times in the game, the game ends in a draw.
+            If both players meet the conditions of the &quot;interconnected islands&quot; rule at the same time, the game ends in a draw. If any position is repeated 3 times in the game, the game ends in a draw.
           </p>
         </div>
       </div>
