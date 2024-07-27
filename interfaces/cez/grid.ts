@@ -21,6 +21,30 @@ all the pieces must be horizontally, vertically (not diagonally) connected to ea
 if there is more than 1 piece interconnected island, but if all islands are connected to the center squares, the player wins the game
 
 if the player has left no pieces, meaning all are captured, the player loses the game
+
+---
+
+The game is played on a 8 by 8 square board just like a chess board. 
+
+# Pieces
+
+There are two types of pieces in Cez.
+
+Pawns move one square either horizontally or vertically (not diagonally). However; if the square that a pawn is going to move is occupied by an opponent pawn, the pawn can not move to that square. Instead, it can take it by jumping over it and moving one more square (2 squares in total). The square that the pawn is going to land must not be occupied by either a friend or opponent piece. These rules make the game look very like checkers, but unlike in checkers the pieces can not perform multiple captures in one turn.
+
+Knigths move two squares either horizontally or vertically just like pawns, and jumps over the piece right in front of them like they do in chess. To capture a piece, they jump over the opponent piece and move a total of 3 squares.
+
+
+# Progressing through the game
+
+In the game; if any piece can be taken, a capturing move must be performed. If there are multiple captures available, any capturing move can be selected.
+
+The "centered islands" rule states that a player can win the game by creating "island"s which are made of pieces that are direct horizontal or vertical neighbors to other pieces in that island. To win, the player must create these  "island"s on the center pieces so that every "island" has at least a piece in the center squares (the d4. d5, e4 and the e5 squares).
+Another way to win the game is to capture all of the opponent pieces.
+
+If both players meet the conditions of the "interconnected islands" rule at the same time, the game ends in a draw.
+If any position is repeated 3 times in the game, the game ends in a draw.
+
 */
 
 const one_move_dirs = [
