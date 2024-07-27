@@ -95,22 +95,22 @@ export class Grid {
 
     this._grid = new Array(8).fill(null).map(() => new Array(8).fill(''));
 
-    this._grid[0][0] = 'k';
+    this._grid[0][0] = 'n';
     this._grid[0][1] = 'p';
     this._grid[1][0] = 'p';
     this._grid[1][1] = 'p';
 
-    this._grid[7][7] = 'k';
+    this._grid[7][7] = 'n';
     this._grid[7][6] = 'p';
     this._grid[6][7] = 'p';
     this._grid[6][6] = 'p';
 
-    this._grid[0][7] = 'K';
+    this._grid[0][7] = 'N';
     this._grid[0][6] = 'P';
     this._grid[1][7] = 'P';
     this._grid[1][6] = 'P';
 
-    this._grid[7][0] = 'K';
+    this._grid[7][0] = 'N';
     this._grid[7][1] = 'P';
     this._grid[6][0] = 'P';
     this._grid[6][1] = 'P';
@@ -147,7 +147,7 @@ export class Grid {
               }
             }
           }
-          else if (piece === 'K' && this.isWhitesTurn) {
+          else if (piece === 'N' && this.isWhitesTurn) {
             for (const direction of two_move_dirs) {
               const move_x = i + direction.x;
               const move_y = j + direction.y;
@@ -191,7 +191,7 @@ export class Grid {
               }
             }
           }
-          else if (piece === 'k' && !this.isWhitesTurn) {
+          else if (piece === 'n' && !this.isWhitesTurn) {
             for (const direction of two_move_dirs) {
               const move_x = i + direction.x;
               const move_y = j + direction.y;
@@ -280,10 +280,10 @@ export class Grid {
       for (let j = 0; j < 8; j++) {
         const piece = this._grid[i][j];
         if (piece) {
-          if (piece === 'P' || piece === 'K') {
+          if (piece === 'P' || piece === 'N') {
             white_pieces.push({ x: i, y: j });
           }
-          else if (piece === 'p' || piece === 'k') {
+          else if (piece === 'p' || piece === 'n') {
             black_pieces.push({ x: i, y: j });
           }
         }
