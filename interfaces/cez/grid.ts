@@ -4,7 +4,7 @@ import { type Tile } from "./tile";
 /*
 There are only pawns and knights on the board
 
-pawns are movinzg 1 square in any direction, not diagonally
+pawns are moving 1 square in any direction, not diagonally
 if there is an enemy piece in the square that a pawn can move, it can capture it by going over that square
 Example: if there is a white pawn in 1x1 and a black pawn or black knight in 1x2, the white pawn can move to 1x3 by capturing the black piece
 knights are moving 2 squares in any direction, not diagonally
