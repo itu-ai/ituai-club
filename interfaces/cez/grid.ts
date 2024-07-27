@@ -331,4 +331,31 @@ export class Grid {
       this.calculateLegalMoves();
     }
   }
+
+  public getFEN() {
+    let fen = '';
+    for (let i = 0; i < 8; i++) {
+      let empty = 0;
+      for (let j = 0; j < 8; j++) {
+        if (this._grid[i][j] === '') {
+          empty++;
+        }
+        else {
+          if (empty > 0) {
+            fen += empty.toString();
+            empty = 0;
+          }
+          fen += this._grid[i][j];
+        }
+      }
+      if (empty > 0) {
+        fen += empty.toString();
+      }
+      if (i < 7) {
+        fen += '/';
+      }
+    }
+    fen += this.isWhitesTurn ? ' w' : ' b';
+    return fen;
+  }
 }
