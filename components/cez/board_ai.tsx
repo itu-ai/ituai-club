@@ -79,7 +79,8 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
 
   const requestAIMove = async () => {
     const fen = grid.getFEN();
-    const response = await fetch('http://localhost:8000/api/v1/cez/calculate', {
+    const API_URL = process.env.NEXT_PUBLIC_CEZ_API_URL;
+    const response = await fetch(`${API_URL}/api/v1/cez/calculate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
