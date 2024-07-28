@@ -19,11 +19,13 @@ export default function CezPage() {
               Try Offline Beta
             </p>
           </Link>
-          <button disabled={true} className="group">
-            <p className="text-xl font-bold text-center text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400 group-disabled:border-zinc-900 group-disabled:text-zinc-500">
-              Against AI (Soon)
+          <Link
+            href="/cez/game/ai"
+          >
+            <p className="text-xl font-bold text-center text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400">
+              Against AI
             </p>
-          </button>
+          </Link>
           <button disabled={true}  className="group">
             <p className="text-xl font-bold text-center text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400 group-disabled:border-zinc-900 group-disabled:text-zinc-500">
               Online (Soon)

@@ -7,6 +7,7 @@ import { Move } from "@/interfaces/cez/move";
 import { Tile } from "@/interfaces/cez/tile";
 
 interface Props {
+  is_player_white: boolean;
   board_size?: number;
 }
 
@@ -17,7 +18,7 @@ interface GameStats {
   moveHistory: Move[];
 }
 
-export const CezBoard: React.FC<Props> = ({ board_size = 720 }) => {
+export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 }) => {
   // canvas variabels
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [grid, setGrid] = useState<Grid>(new Grid());
@@ -28,12 +29,11 @@ export const CezBoard: React.FC<Props> = ({ board_size = 720 }) => {
   const light_tile_color = '#f0d9b5';
   const dark_tile_color = '#b58863';
 
-  // game control variables
   const [gameStats, setGameStats] = useState<GameStats>({
     isGameOver: false,
     winnerSide: 'none',
     isWhitesTurn: true,
-    moveHistory: []
+    moveHistory: [],
   });
 
   const drawBoard = () => {
@@ -77,8 +77,43 @@ export const CezBoard: React.FC<Props> = ({ board_size = 720 }) => {
     }
   }
 
+  const requestAIMove = async () => {
+    const fen = grid.getFEN();
+    const response = await fetch('http://localhost:8000/api/v1/cez/calculate', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ fen: fen }),
+    })
+    const data = await response.json();
+    /*
+    data =
+    {
+    "from_": {
+        "column": 1,
+        "row": 7
+    },
+    "to": {
+        "column": 2,
+        "row": 7
+    },
+    "capture": null
+    } 
+    */
+    const from = { x: data.from_.column, y: data.from_.row };
+    const to = { x: data.to.column, y: data.to.row };
+    const capture = data.capture ? { x: data.capture.column, y: data.capture.row } : null;
+    const move = { from, to, capture };
+    handlePieceMove(move);
+
+  }
+
   useEffect(() => {
     drawBoard();
+    if (!is_player_white) {
+      requestAIMove();
+    }
   });
 
   const handlePieceMove = (move: Move) => {
@@ -103,6 +138,7 @@ export const CezBoard: React.FC<Props> = ({ board_size = 720 }) => {
   }
 
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    if (is_player_white && !grid.isWhitesTurn) return;
     // get the square/tile the mouse is in
     const x = Math.floor(e.nativeEvent.offsetX / tile_size);
     const y = Math.floor(e.nativeEvent.offsetY / tile_size);
@@ -111,6 +147,7 @@ export const CezBoard: React.FC<Props> = ({ board_size = 720 }) => {
       const move = grid.legalMoves.find((move: Move) => selectedPiece !== null && move.to.x === x && move.to.y === y && move.from.x === selectedPiece.x && move.from.y === selectedPiece.y);
       if (move) {
         handlePieceMove(move);
+        requestAIMove();
       }
       else {
         selectedPiece = null;
