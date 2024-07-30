@@ -57,7 +57,7 @@ export const projects: Project[] = [
   },
   {
     title: "Image Turing Test",
-    href: "/turing",
+    href: "/turing/image",
     image_src: "/turing_test.png",
     image_alt: "Image Turing Test",
     description: "Simple Image Turing Test",
