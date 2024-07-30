@@ -4,7 +4,7 @@ import { ApiService } from '@/services/api';
 import { useEffect, useState } from 'react';
 import LoadingLayer from '@/components/star-wars-editor/loading-layer';
 import Image from 'next/image';
-import { ImageType } from '@/interfaces/image_type';
+import { ImageType } from '@/interfaces/editor/image_type';
 
 
 type Props = {
