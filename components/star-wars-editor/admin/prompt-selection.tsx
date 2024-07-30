@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { PromptData } from '@/interfaces/prompt_data';
+import { PromptData } from '@/interfaces/editor/prompt_data';
 
 interface AdminPromptSelectionProps {
   confirmSelectionCallback: (prompt: PromptData) => Promise<void>;

@@ -1,4 +1,4 @@
-import { PromptData } from "@/interfaces/prompt_data"
+import { PromptData } from "@/interfaces/editor/prompt_data"
 
 const disneyPrompt: PromptData = {
   title: "Disney",

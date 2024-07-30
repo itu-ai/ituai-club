@@ -1,5 +1,5 @@
-import { ImageType } from "@/interfaces/image_type";
-import { PromptData } from "@/interfaces/prompt_data";
+import { ImageType } from "@/interfaces/editor/image_type";
+import { PromptData } from "@/interfaces/editor/prompt_data";
 
 export class ApiService {
     static BASE_URL: string = process.env.NEXT_PUBLIC_API_URL as string;

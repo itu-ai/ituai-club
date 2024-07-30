@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
-import { PromptData } from "@/interfaces/prompt_data"
+import { PromptData } from "@/interfaces/editor/prompt_data"
 import { ApiService } from '@/services/api';
 import QRCode from 'qrcode.react';
 import LoadingLayer from './loading-layer';
-import { ImageType } from '@/interfaces/image_type';
+import { ImageType } from '@/interfaces/editor/image_type';
 
 interface ImageToOutputProps {
     rawImage: string;
