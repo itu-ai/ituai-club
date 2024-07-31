@@ -71,4 +71,12 @@ export const projects: Project[] = [
     description: "Chess Variation 'Cez', currently in development",
     developers: [devs.erthium, devs.husseinberg]
   },
+  {
+    title: "Reverse Turing Test",
+    href: "/turing/reverse",
+    image_src: "/reverse_turing_test.png",
+    image_alt: "Reverse Turing Test",
+    description: "Reverse Turing Test, currently in development without mobile support",
+    developers: [devs.erthium]
+  },
 ];
