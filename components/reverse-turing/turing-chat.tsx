@@ -76,7 +76,7 @@ export const TuringChat: React.FC<Props> = ({ human_character, onTestFinished })
 		else if (currentAgent.origin === "Human") {
 			return;
 		}
-		if (turn + 1 === MAX_TURNS) {
+		if (turn + 1 >= MAX_TURNS) {
 			onFinished();
 		}
 		setTurn(prevTurn => prevTurn + 1);
@@ -84,10 +84,9 @@ export const TuringChat: React.FC<Props> = ({ human_character, onTestFinished })
 
 	const submitHumanMessage = () => {
 		if (input === "") return;
-		if (turn >= MAX_TURNS) return;
 		setMessages(prevMessages => [...prevMessages, { agent: agents[turn % agents.length], content: input, createdAt: new Date() }]);
 		setInput("");
-		if (turn + 1 === MAX_TURNS) {
+		if (turn + 1 >= MAX_TURNS) {
 
 		}
 		setTurn(prevTurn => prevTurn + 1);

@@ -1,8 +1,5 @@
 'use client';
 
-import { useState } from "react";
-
-import { Character } from "@/interfaces/turing/character";
 import { AgentGuess } from "@/interfaces/turing/agent-guess";
 
 interface Props {
