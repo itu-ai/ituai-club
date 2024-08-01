@@ -34,7 +34,8 @@ export const TuringChat: React.FC<Props> = ({ human_character, onTestFinished })
 	const [turn, setTurn] = useState(0);
 
 	// Constants
-	const MAX_TURNS = 10;
+	const MAX_TURNS = 9;
+
 
 	const assignAgents = () => {
 		const human_agent: Agent = {
@@ -76,9 +77,6 @@ export const TuringChat: React.FC<Props> = ({ human_character, onTestFinished })
 		else if (currentAgent.origin === "Human") {
 			return;
 		}
-		if (turn + 1 >= MAX_TURNS) {
-			onFinished();
-		}
 		setTurn(prevTurn => prevTurn + 1);
 	}
 
@@ -86,9 +84,6 @@ export const TuringChat: React.FC<Props> = ({ human_character, onTestFinished })
 		if (input === "") return;
 		setMessages(prevMessages => [...prevMessages, { agent: agents[turn % agents.length], content: input, createdAt: new Date() }]);
 		setInput("");
-		if (turn + 1 >= MAX_TURNS) {
-
-		}
 		setTurn(prevTurn => prevTurn + 1);
 	}
 
@@ -117,6 +112,9 @@ export const TuringChat: React.FC<Props> = ({ human_character, onTestFinished })
 	useEffect(() => {
 		if (agents.length > 0 && agents[turn % agents.length].origin !== "Human") {
 				handleTurn();
+		}
+		if (turn >= MAX_TURNS) {
+			onFinished();
 		}
 	}, [turn, agents]);
 
