@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { projects } from "./projects";
 import { Card } from "@/components/card";
+import Footer from "@/components/footer";
 
 export default function Home() {
   return (
@@ -48,11 +49,7 @@ export default function Home() {
           </Card>
         ))}
       </div>
-      <footer className=" pb-6 mt-6 lg:mt-24">
-        <p className="text-center text-zinc-500 text-xs lg:text-base">
-          © 2024 ITU Artificial Intelligence Club. All rights reserved.
-        </p>
-      </footer>
+      <Footer className="mt-6 lg:mt-24"/>
     </div>
   );
 }
