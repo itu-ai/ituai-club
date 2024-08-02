@@ -27,7 +27,7 @@ interface Props  {
 	onTestFinished: (agent_guesses: AgentGuess[]) => void;
 }
 
-export const TuringChat: React.FC<Props> = ({ human_character, onTestFinished }) => {
+const TuringChat: React.FC<Props> = ({ human_character, onTestFinished }) => {
 	const [messages, setMessages] = useState<Message[]>([]);
 	const [input, setInput] = useState("");
 	const [agents, setAgents] = useState<Agent[]>([]);
@@ -120,39 +120,44 @@ export const TuringChat: React.FC<Props> = ({ human_character, onTestFinished })
 
 
 	return (
-		<div className="flex flex-col items-center justify-center w-full h-full p-12">
+		<div className="flex flex-col items-center justify-center w-full h-full px-4 py-4 lg:p-12">
 			<div className="flex flex-col items-center justify-center w-full h-full">
 				{/* Agents */}
-				<div className="grid grid-cols-3 gap-x-4 mb-4">
+				<div className="grid grid-cols-1 lg:grid-cols-3 gap-y-2 lg:gap-x-4 mb-2 lg:mb-4 w-full lg:w-auto">
 					{agents.map((agent, index) => (
-						<div key={index} className="flex flex-col items-center justify-center px-6 py-4 rounded-xl transition-all duration-400"
+						<div key={index} className="flex flex-col items-center justify-center w-full lg:w-auto px-6 py-4 rounded-xl transition-all duration-400"
 							style={{ backgroundColor: agents[turn % agents.length] === agent ? "rgb(40, 40, 40)" : "rgb(10, 10, 10)" }}
 						>
-							<p className="text-lg text-zinc-100">
+							<p className="text-sm lg:text-lg text-zinc-100">
 								{agent.name === human_character.name ? `${agent.name} (You)` : agent.name}
 							</p>
 						</div>
 					))}
 				</div>
 				{/* Chat */}
-				<div className="flex flex-col items-start justify-start w-full h-[34rem] p-4 border-2 border-zinc-800 bg-zinc-900 rounded-xl overflow-y-auto mb-6">
+				<div className="flex flex-col items-start justify-start w-full h-[34rem] p-4 border-2 border-zinc-800 bg-zinc-900 rounded-xl overflow-y-auto mb-2 lg:mb-6">
 					{messages.map((message, index) => (
 						<div key={index} className="flex flex-col items-start justify-start mb-4">
-							<p className="text-sm text-zinc-400 text-start font-bold">{message.agent.name}</p>
-							<p className="text-lg text-zinc-200 text-start">{message.content}</p>
+							<p className="text-xs lg:text-sm text-zinc-400 text-start font-bold">
+								{message.agent.name}
+							</p>
+							<p className="text-sm lg:text-lg text-zinc-200 text-start">
+								{message.content}
+							</p>
 						</div>
 					))}
 				</div>
 				{/* Human Input */}
-				<div className="flex items-center justify-center w-full gap-x-2">
+				<div className="flex flex-col-reverse lg:flex-row items-center justify-center w-full gap-y-2 lg:gap-x-2">
 					<textarea
-						className="w-full h-24 bg-zinc-900 text-zinc-100 rounded-xl p-4 border-2 border-zinc-800 outline-none focus:outline-none"
+						className="w-full h-24 bg-zinc-900 text-zinc-100 rounded-xl p-4 border-2 border-zinc-800 placeholder-zinc-600 outline-none focus:outline-none"
 						style={{ resize: "none" }}
 						value={input}
+						placeholder="Remember, they do not know you are human..."
 						onChange={(e) => setInput(e.target.value)}
 					/>
 					<button
-						className="h-24 bg-zinc-900 text-zinc-400 border-2 border-zinc-800 rounded-xl px-6"
+						className="h-auto w-full lg:h-24 lg:w-auto bg-zinc-900 text-zinc-400 border-2 border-zinc-800 rounded-md lg:rounded-xl py-2 lg:px-6"
 						onClick={submitHumanMessage}
 					>
 						Send
@@ -162,3 +167,5 @@ export const TuringChat: React.FC<Props> = ({ human_character, onTestFinished })
     </div>
 	);
 };
+
+export default TuringChat;
