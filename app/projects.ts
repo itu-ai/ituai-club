@@ -68,7 +68,7 @@ export const projects: Project[] = [
     href: "/cez",
     image_src: "/cez.png",
     image_alt: "Cez",
-    description: "Chess Variation 'Cez', currently in development",
+    description: "Chess Variation 'Cez'",
     developers: [devs.erthium, devs.husseinberg]
   },
   {
@@ -76,7 +76,7 @@ export const projects: Project[] = [
     href: "/turing/reverse",
     image_src: "/reverse_turing_test.png",
     image_alt: "Reverse Turing Test",
-    description: "Reverse Turing Test, currently in development without mobile support",
+    description: "Tables are turned, you are a Chatbot now",
     developers: [devs.erthium]
   },
 ];
