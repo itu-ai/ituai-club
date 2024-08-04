@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import { Grid } from "@/interfaces/cez/grid";
 import { Move } from "@/interfaces/cez/move";
 import { Tile } from "@/interfaces/cez/tile";
+import { drawCezBoard, drawLegalMoves, mouseToTile } from "@/services/cez_board";
 
 interface Props {
   is_player_white: boolean;
@@ -40,73 +41,39 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
     if (!ctx) return;
-    // clear the canvas
-    ctx.clearRect(0, 0, board_size, board_size);
-
-    // draw the tiles
-    for (let i = 0; i < 8; i++) {
-      for (let j = 0; j < 8; j++) {
-        ctx.fillStyle = (i + j) % 2 === 0 ? light_tile_color : dark_tile_color;
-        ctx.fillRect(i * tile_size, j * tile_size, tile_size, tile_size);
-      }
-    }
-
-    // draw the pieces
-    for (let i = 0; i < 8; i++) {
-      for (let j = 0; j < 8; j++) {
-        const piece = grid.grid[i][j];
-        if (piece) {
-          const img = new Image();
-          img.src = `/cez/${piece}.png`;
-          img.onload = () => {
-            // To Check Later: Make sure tiles are correct
-            ctx.drawImage(img, i * tile_size, j * tile_size, tile_size, tile_size);
-          }
-        }
-      }
-    }
-
-    // draw the legal moves
-    if (selectedPiece !== null) {
-      ctx.fillStyle = '#00ff00';
-      // draw all the legal moves of the selected piece
-      const legalMoves = grid.legalMoves.filter((move: Move) => selectedPiece !== null && move.from.x === selectedPiece.x && move.from.y === selectedPiece.y);
-      legalMoves.forEach((move: Move) => {
-        ctx.fillRect(move.to.x * tile_size, move.to.y * tile_size, tile_size, tile_size);
-      });
-    }
+    drawCezBoard(ctx, grid, board_size, tile_size);
+    drawLegalMoves(ctx, grid, selectedPiece, tile_size);
   }
 
   const requestAIMove = async () => {
     const fen = grid.getFEN();
+    console.log(fen);
     const API_URL = process.env.NEXT_PUBLIC_CEZ_API_URL;
-    const response = await fetch(`${API_URL}/api/v1/cez/calculate`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ fen: fen }),
-    })
-    const data = await response.json();
-    /*
-    data =
-    {
-    "from_": {
-        "column": 1,
-        "row": 7
-    },
-    "to": {
-        "column": 2,
-        "row": 7
-    },
-    "capture": null
-    } 
-    */
-    const from = { x: data.from_.column, y: data.from_.row };
-    const to = { x: data.to.column, y: data.to.row };
-    const capture = data.capture ? { x: data.capture.column, y: data.capture.row } : null;
-    const move = { from, to, capture };
-    handlePieceMove(move);
+    const endpoint = `${API_URL}/api/v1/cez/calculate`;
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ fen: fen }),
+      })
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      const from = { x: data.from_.column, y: data.from_.row };
+      const to = { x: data.to.column, y: data.to.row };
+      const capture = data.capture ? { x: data.capture.column, y: data.capture.row } : null;
+      const move = { from, to, capture };
+      console.log("From", from);
+      console.log("To", to);
+      console.log("Capture", capture);
+      handlePieceMove(move);
+    }
+    catch (error) {
+      console.error(error);
+    }
 
   }
 
@@ -141,8 +108,7 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
     if (is_player_white && !grid.isWhitesTurn) return;
     // get the square/tile the mouse is in
-    const x = Math.floor(e.nativeEvent.offsetX / tile_size);
-    const y = Math.floor(e.nativeEvent.offsetY / tile_size);
+    const { x, y } = mouseToTile(e.nativeEvent.offsetX, e.nativeEvent.offsetY, tile_size);
     const hitTile = grid.grid[x][y];
     if (selectedPiece) {
       const move = grid.legalMoves.find((move: Move) => selectedPiece !== null && move.to.x === x && move.to.y === y && move.from.x === selectedPiece.x && move.from.y === selectedPiece.y);
