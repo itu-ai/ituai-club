@@ -6,6 +6,7 @@ import { Grid } from "@/interfaces/cez/grid";
 import { Move } from "@/interfaces/cez/move";
 import { Tile } from "@/interfaces/cez/tile";
 import { drawCezBoard, drawLegalMoves, mouseToTile } from "@/services/cez_board";
+import { ApiService } from "@/services/api";
 
 interface Props {
   is_player_white: boolean;
@@ -46,33 +47,18 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
   }
 
   const requestAIMove = async () => {
-    const fen = grid.getFEN();
-    console.log(fen);
-    const API_URL = process.env.NEXT_PUBLIC_CEZ_API_URL;
-    const endpoint = `${API_URL}/api/v1/cez/calculate`;
     try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ fen: fen }),
-      })
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+      const fen = grid.getFEN();
+      const response = await ApiService.getCezAIMove(fen);
       const data = await response.json();
       const from = { x: data.from_.column, y: data.from_.row };
       const to = { x: data.to.column, y: data.to.row };
       const capture = data.capture ? { x: data.capture.column, y: data.capture.row } : null;
       const move = { from, to, capture };
-      console.log("From", from);
-      console.log("To", to);
-      console.log("Capture", capture);
       handlePieceMove(move);
     }
     catch (error) {
-      console.error(error);
+      console.error("Error requesting AI move.");
     }
 
   }
