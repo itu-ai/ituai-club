@@ -334,10 +334,10 @@ export class Grid {
 
   public getFEN() {
     let fen = '';
-    for (let i = 0; i < 8; i++) {
+    for (let y = 0; y < 8; y++) {
       let empty = 0;
-      for (let j = 0; j < 8; j++) {
-        if (this._grid[i][j] === '') {
+      for (let x = 0; x < 8; x++) {
+        if (this._grid[x][y] === '') {
           empty++;
         }
         else {
@@ -345,13 +345,13 @@ export class Grid {
             fen += empty.toString();
             empty = 0;
           }
-          fen += this._grid[i][j];
+          fen += this._grid[x][y];
         }
       }
       if (empty > 0) {
         fen += empty.toString();
       }
-      if (i < 7) {
+      if (y < 7) {
         fen += '/';
       }
     }
