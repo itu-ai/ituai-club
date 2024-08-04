@@ -49,8 +49,7 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
   const requestAIMove = async () => {
     try {
       const fen = grid.getFEN();
-      const response = await ApiService.getCezAIMove(fen);
-      const data = await response.json();
+      const data = await ApiService.getCezAIMove(fen);
       const from = { x: data.from_.column, y: data.from_.row };
       const to = { x: data.to.column, y: data.to.row };
       const capture = data.capture ? { x: data.capture.column, y: data.capture.row } : null;
