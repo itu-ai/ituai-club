@@ -121,11 +121,11 @@ export class ApiService {
 
     // Cez Requests
 
-    static async getCezAIMove(fen: string) {
+    static async getCezAIMove(fen: string, depth: number) {
       const url = `${CEZ_API_URL}/api/cez/ai/calculate`;
       const headers = new Headers();
       headers.append('Content-Type', 'application/json');
-      const body = JSON.stringify({ fen: fen });
+      const body = JSON.stringify({ fen: fen, depth: depth });
       const response = await ApiService.fetchData(url, 'POST', body, headers);
       return response.json();
     }
