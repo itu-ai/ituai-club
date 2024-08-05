@@ -13,14 +13,14 @@ export default function CezPage() {
       <div className="flex flex-col mt-6">
         <div className="flex flex-col lg:flex-row gap-4 items-center justify-center">
           <Link
-            href="/cez/game/offline"
+            href="/cez/offline"
           >
             <p className="text-xl font-bold text-center text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400">
               Try Offline Beta
             </p>
           </Link>
           <Link
-            href="/cez/game/ai"
+            href="/cez/ai"
           >
             <p className="text-xl font-bold text-center text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400">
               Against AI
