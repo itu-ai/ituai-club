@@ -27,10 +27,6 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
   let selectedPiece: Tile | null = null;
   const tile_size = board_size / 8;
 
-  // theme/colors
-  const light_tile_color = '#f0d9b5';
-  const dark_tile_color = '#b58863';
-
   const [gameStats, setGameStats] = useState<GameStats>({
     isGameOver: false,
     winnerSide: 'none',
@@ -48,6 +44,7 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
   }
 
   const requestAIMove = async () => {
+    if (gameStats.isGameOver) return;
     try {
       const fen = grid.getFEN();
       const data = await ApiService.getCezAIMove(fen, depth);
