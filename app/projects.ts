@@ -45,7 +45,7 @@ export const projects: Project[] = [
     image_src: "/editor_summit.png",
     image_alt: "Editor Summit'24",
     description: "Image Editor made for AI Summit'24",
-    developers: [devs.erthium, devs.husseinberg, devs.utkub24],
+    developers: [devs.erthium, devs.utkub24, devs.husseinberg],
   },
   {
     title: "Editor Star Wars",
@@ -53,7 +53,7 @@ export const projects: Project[] = [
     image_src: "/editor_starwars.png",
     image_alt: "Editor Star Wars",
     description: "Image Editor made for Star Wars Movie Night",
-    developers: [devs.erthium, devs.utkub24, devs.husseinberg],
+    developers: [devs.erthium, devs.husseinberg, devs.utkub24],
   },
   {
     title: "Image Turing Test",
