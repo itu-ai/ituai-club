@@ -25,8 +25,6 @@ export const CezBoard: React.FC<Props> = ({ board_size = 720 }) => {
   let selectedPiece: Tile | null = null;
   const tile_size = board_size / 8;
 
-
-
   // game control variables
   const [gameStats, setGameStats] = useState<GameStats>({
     isGameOver: false,
