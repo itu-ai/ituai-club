@@ -4,6 +4,14 @@ export default function CezPage() {
 
   return (
     <div className="flex flex-col items-center justify-center px-4 lg:px-0">
+      <div className="fixed top-2 right-2 lg:top-5 lg:right-5 z-1 w-10 h-10 lg:w-16 lg:h-16 p-1 ">
+        <Link href="/">
+          <img
+            src="/logo/ai_logo.svg"
+            alt="Logo"
+          />
+        </Link>
+      </div>
       <h1 className="text-4xl font-bold text-center text-zinc-200 mt-6 lg:mt-8">
         Cez - Chess Variation
       </h1>

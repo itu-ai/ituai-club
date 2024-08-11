@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { getRandomImage } from "@/components/turing/turingService";
 import LoadingLayer from "@/components/turing/loading-layer";
@@ -58,6 +59,14 @@ export default function TuringTestPage() {
   return (
     <>
       <div className="flex flex-col items-center justify-between min-h-screen overflow-x-hidden px-4 lg:px-0">
+        <div className="fixed top-2 right-2 lg:top-5 lg:right-5 z-1 w-10 h-10 lg:w-16 lg:h-16 p-1 ">
+          <Link href="/">
+            <img
+              src="/logo/ai_logo.svg"
+              alt="Logo"
+            />
+          </Link>
+        </div>
         {/* Header */}
         <header className="flex flex-col items-center justify-center w-full">
           <h1 className="text-center font-semibold text-2xl lg:text-4xl text-zinc-200 mt-6 lg:mt-12 mb-2 lg:mb-4">

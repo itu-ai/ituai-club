@@ -1,11 +1,17 @@
 import AIPrompter from "@/components/star-wars-editor/ai-prompter";
+import Link from "next/link";
 
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-between w-screen min-h-screen">
       <div className="general-bg bg-gradient-to-br from-black via-gray-800 to-black"/>
       <div className="fixed top-2 right-2 lg:top-5 lg:right-5 z-1 w-10 h-10 lg:w-16 lg:h-16 p-1 ">
-        <img src="/logo/ai_logo.svg" alt="Logo" />
+        <Link href="/">
+          <img
+            src="/logo/ai_logo.svg"
+            alt="Logo"
+          />
+        </Link>
       </div>
       <h1 className="text-center mx-12 mt-8 lg:mt-12 text-3xl lg:text-6xl font-starout text-yellow-400">
         Enter the Star Wars universe
