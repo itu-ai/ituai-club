@@ -39,17 +39,31 @@ const AIPrompter: React.FC = () => {
     setState(AIPrompterState.CAPTURE);
   }
 
+  const goBackToSelection = async (): Promise<void> => {
+    setState(AIPrompterState.SELECT_PROMPT);
+  }
+
   return (
     <div className="px-4 lg:px-0 py-12">
       <div className="">
         {state === AIPrompterState.CAPTURE && 
-          <Capture confirmCaptureCallback={confirmImageCallback} />
+          <Capture
+            confirmCaptureCallback={confirmImageCallback}
+          />
         }
         {state === AIPrompterState.SELECT_PROMPT && 
-          <PromptSelection confirmSelectionCallback={confirmPromptCallback} goBackCallback={goBackToCapture} />
+          <PromptSelection
+            confirmSelectionCallback={confirmPromptCallback}
+            goBackCallback={goBackToCapture}
+          />
         }
         {state === AIPrompterState.OUTPUT && image && selectedPrompt &&
-          <ImageToOutput rawImage={image} promptData={selectedPrompt} restartCallback={restartCallback}/>
+          <ImageToOutput
+            rawImage={image}
+            promptData={selectedPrompt}
+            restartCallback={restartCallback}
+            goBackCallback={goBackToSelection}
+          />
         }
       </div>
     </div>
