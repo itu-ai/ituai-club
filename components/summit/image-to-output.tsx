@@ -9,11 +9,12 @@ interface ImageToOutputProps {
     rawImage: string;
     promptData: PromptData;
     restartCallback: () => Promise<void>;
+    goBackCallback: () => Promise<void>;
 }
 
 const pageUrl = process.env.NEXT_PUBLIC_VIEW_URL;
 
-const ImageToOutput: React.FC<ImageToOutputProps> = ({rawImage, promptData, restartCallback}) => {
+const ImageToOutput: React.FC<ImageToOutputProps> = ({ rawImage, promptData, restartCallback, goBackCallback }) => {
   const [shownImage, setShownImage] = useState<string>(rawImage);
   const [imageID, setImageID] = useState<string | undefined>(undefined);
   const [qrUrl, setQrUrl] = useState<string | undefined>(undefined);
@@ -83,6 +84,10 @@ const ImageToOutput: React.FC<ImageToOutputProps> = ({rawImage, promptData, rest
                 Download
               </button>
             }
+            <button className="summit-button" 
+              onClick={goBackCallback}>
+              Select Another Prompt
+            </button>
           </div>
         </>
       :

@@ -9,11 +9,12 @@ interface ImageToOutputProps {
     rawImage: string;
     promptData: PromptData;
     restartCallback: () => Promise<void>;
+    goBackCallback: () => Promise<void>;
 }
 
 const pageUrl = process.env.NEXT_PUBLIC_VIEW_URL;
 
-const ImageToOutput: React.FC<ImageToOutputProps> = ({rawImage, promptData, restartCallback}) => {
+const ImageToOutput: React.FC<ImageToOutputProps> = ({ rawImage, promptData, restartCallback, goBackCallback }) => {
   const [shownImage, setShownImage] = useState<string>(rawImage);
   const [imageID, setImageID] = useState<string | undefined>(undefined);
   const [qrUrl, setQrUrl] = useState<string | undefined>(undefined);
@@ -73,16 +74,20 @@ const ImageToOutput: React.FC<ImageToOutputProps> = ({rawImage, promptData, rest
                 Scan the qr to download your image
               </p>
             </div>
-            <button className="sw-button" 
+            <button className="sw-button"
               onClick={restartCallback}>
               Restart
             </button>
             {isOnMobile &&
-              <button className="sw-button" 
+              <button className="sw-button"
                 onClick={downloadImage}>
                 Download
               </button>
             }
+            <button className="sw-button"
+              onClick={goBackCallback}>
+              Select Another Prompt
+            </button>          
           </div>
         </>
       :

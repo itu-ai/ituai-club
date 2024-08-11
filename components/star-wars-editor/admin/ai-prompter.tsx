@@ -39,17 +39,32 @@ const AdminAIPrompter: React.FC = () => {
     setState(AIPrompterState.CAPTURE);
   }
 
+  const goBackToSelection = async (): Promise<void> => {
+    setSelectedPrompt(undefined);
+    setState(AIPrompterState.SELECT_PROMPT);
+  }
+
   return (
     <div className="">
       <div className="">
         {state === AIPrompterState.CAPTURE && 
-          <Capture confirmCaptureCallback={confirmImageCallback} />
+          <Capture
+            confirmCaptureCallback={confirmImageCallback}
+          />
         }
         {state === AIPrompterState.SELECT_PROMPT && 
-          <AdminPromptSelection confirmSelectionCallback={confirmPromptCallback} goBackCallback={goBackToCapture} />
+          <AdminPromptSelection
+            confirmSelectionCallback={confirmPromptCallback}
+            goBackCallback={goBackToCapture}
+          />
         }
         {state === AIPrompterState.OUTPUT && image && selectedPrompt &&
-          <ImageToOutput rawImage={image} promptData={selectedPrompt} restartCallback={restartCallback}/>
+          <ImageToOutput
+            rawImage={image}
+            promptData={selectedPrompt}
+            restartCallback={restartCallback}
+            goBackCallback={goBackToSelection}
+          />
         }
       </div>
     </div>

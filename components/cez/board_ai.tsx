@@ -27,10 +27,6 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
   let selectedPiece: Tile | null = null;
   const tile_size = board_size / 8;
 
-  // theme/colors
-  const light_tile_color = '#f0d9b5';
-  const dark_tile_color = '#b58863';
-
   const [gameStats, setGameStats] = useState<GameStats>({
     isGameOver: false,
     winnerSide: 'none',
@@ -48,6 +44,7 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
   }
 
   const requestAIMove = async () => {
+    if (gameStats.isGameOver) return;
     try {
       const fen = grid.getFEN();
       const data = await ApiService.getCezAIMove(fen, depth);
@@ -146,8 +143,8 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
             Medium
           </button>
           <button className="w-24 text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400"
-            onClick={() => setDepth(7)}
-            style={{ borderColor: depth === 7 ? '#ffffff' : '#555' }}
+            onClick={() => setDepth(6)}
+            style={{ borderColor: depth === 6 ? '#ffffff' : '#555' }}
           >
             Hard
           </button>
