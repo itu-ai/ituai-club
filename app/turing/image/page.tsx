@@ -59,7 +59,7 @@ export default function TuringTestPage() {
   return (
     <>
       <div className="flex flex-col items-center justify-between min-h-screen overflow-x-hidden px-4 lg:px-0">
-        <div className="fixed top-2 right-2 lg:top-5 lg:right-5 z-1 w-10 h-10 lg:w-16 lg:h-16 p-1 ">
+        <div className="absolute top-2 right-2 lg:top-5 lg:right-5 z-1 w-10 h-10 lg:w-16 lg:h-16 p-1 ">
           <Link href="/">
             <img
               src="/logo/ai_logo.svg"
