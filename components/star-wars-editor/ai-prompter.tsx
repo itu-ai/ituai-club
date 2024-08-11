@@ -40,6 +40,7 @@ const AIPrompter: React.FC = () => {
   }
 
   const goBackToSelection = async (): Promise<void> => {
+    setSelectedPrompt(undefined);
     setState(AIPrompterState.SELECT_PROMPT);
   }
 
