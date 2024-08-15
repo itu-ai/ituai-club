@@ -37,14 +37,14 @@ export const drawCezBoard = (ctx: CanvasRenderingContext2D, grid: any, board_siz
 }
 
 export const drawLegalMoves = (ctx: CanvasRenderingContext2D, grid: any, selectedPiece: any, tile_size: number): any => {
-  if (selectedPiece !== null) {
-    ctx.fillStyle = '#00ff00';
-    // draw all the legal moves of the selected piece
-    const legalMoves = grid.legalMoves.filter((move: Move) => selectedPiece !== null && move.from.x === selectedPiece.x && move.from.y === selectedPiece.y);
-    legalMoves.forEach((move: Move) => {
-      ctx.fillRect(move.to.x * tile_size, (7 - move.to.y) * tile_size, tile_size, tile_size);
-    });
-  }
+  if (selectedPiece !== null) return;
+  ctx.fillStyle = '#00ff00';
+  // draw all the legal moves of the selected piece
+  const legalMoves = grid.legalMoves.filter((move: Move) => selectedPiece !== null && move.from.x === selectedPiece.x && move.from.y === selectedPiece.y);
+  legalMoves.forEach((move: Move) => {
+    ctx.fillRect(move.to.x * tile_size, (7 - move.to.y) * tile_size, tile_size, tile_size);
+  });
+
 }
 
 export const mouseToTile = (mouse_offset_x: number, mouse_offset_y: number, tile_size: number): {x: number, y: number} => {
