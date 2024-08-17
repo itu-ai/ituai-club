@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { PT_Mono } from "next/font/google";
 import "./globals.css";
 
 import { Analytics } from "@/components/analytics";
 
-const font = Inter({ subsets: ["latin"] });
+const font = PT_Mono({ weight: "400", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ITU AI",
