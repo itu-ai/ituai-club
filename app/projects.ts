@@ -52,7 +52,7 @@ export const projects: Project[] = [
     href: "/editor/starwars",
     image_src: "/editor_starwars.png",
     image_alt: "Editor Star Wars",
-    description: "Image Editor made for Star Wars Movie Night",
+    description: "Image Editor made for Star Wars Night",
     developers: [devs.erthium, devs.husseinberg, devs.utkub24],
   },
   {
