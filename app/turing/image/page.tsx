@@ -59,6 +59,8 @@ export default function TuringTestPage() {
   return (
     <>
       <div className="flex flex-col items-center justify-between min-h-screen overflow-x-hidden px-4 lg:px-0">
+        {/* Background */}
+        <div className="absolute top-0 left-0 -z-10 w-full h-full jigsaw-bg"/>
         <div className="absolute top-2 right-2 lg:top-5 lg:right-5 z-1 w-10 h-10 lg:w-16 lg:h-16 p-1 ">
           <Link href="/">
             <img
@@ -85,7 +87,7 @@ export default function TuringTestPage() {
                 {"Score: " + score}
               </p>
               <p className="text-center font-semibold text-base lg:text-lg text-zinc-200">
-                {"Highest Score: " + highestScore}
+                {"Personal Best: " + highestScore}
               </p>
             </div>
             {image !== ""
@@ -93,7 +95,7 @@ export default function TuringTestPage() {
               <img 
                 src={image} 
                 alt="Turing Test Image" 
-                className="w-96 h-96 object-cover rounded-lg shadow-lg"
+                className="w-96 h-96 object-cover rounded-lg shadow-lg prevent-selector"
                 onError={() => getNewImage()}  
               />
               :
