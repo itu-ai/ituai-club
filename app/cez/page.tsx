@@ -21,7 +21,7 @@ export default function CezPage() {
       <h1 className="text-2xl lg:text-4xl font-bold text-center text-zinc-200 mt-12 lg:mt-8">
         Cez - Chess Variant
       </h1>
-      <p className="text-sm lg:text-base lg:text-xl font-medium text-center text-zinc-200 mt-6 lg:mt-8">
+      <p className="text-base lg:text-xl font-medium text-center text-zinc-200 mt-6 lg:mt-8">
         Cez is a chess variation, with the same board but different pieces and rules.
       </p>
       <div className="flex flex-col mt-6">
