@@ -4,6 +4,11 @@ export default function CezPage() {
 
   return (
     <div className="flex flex-col items-center justify-center px-4 lg:px-0">
+      {/* Background */}
+      <div className="fixed top-0 left-0 p-12 w-full h-full -z-10">
+        <div className="cez-bg w-full h-full"/>
+      </div>
+      {/* Logo */}
       <div className="absolute top-2 right-2 lg:top-5 lg:right-5 z-1 w-10 h-10 lg:w-16 lg:h-16 p-1 ">
         <Link href="/">
           <img
