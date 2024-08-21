@@ -30,6 +30,14 @@ html {
   -ms-user-select: none;
 }
 
+.cez-bg {
+  background-image: url('/cez/cez_initial_position.png');
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: grayscale(90%) invert() opacity(0.04);
+}
+
 .jigsaw-bg {
   background-color: black;
   background-image: url('/turing/jigsaw.svg');
