@@ -68,7 +68,7 @@ export const projects: Project[] = [
     href: "/cez",
     image_src: "/cez.png",
     image_alt: "Cez",
-    description: "Chess Variation 'Cez'",
+    description: "Chess Variant 'Cez'",
     developers: [devs.erthium, devs.husseinberg]
   },
   {
