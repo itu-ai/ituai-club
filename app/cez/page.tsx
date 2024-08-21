@@ -17,36 +17,41 @@ export default function CezPage() {
           />
         </Link>
       </div>
-      <h1 className="text-4xl font-bold text-center text-zinc-200 mt-6 lg:mt-8">
+      <h1 className="text-2xl lg:text-4xl font-bold text-center text-zinc-200 mt-12 lg:mt-8">
         Cez - Chess Variant
       </h1>
-      <p className="text-xl font-medium text-center text-zinc-200 mt-6 lg:mt-8">
+      <p className="text-sm lg:text-base lg:text-xl font-medium text-center text-zinc-200 mt-6 lg:mt-8">
         Cez is a chess variation, with the same board but different pieces and rules.
       </p>
       <div className="flex flex-col mt-6">
-        <div className="flex flex-col lg:flex-row gap-4 items-center justify-center">
+        {/* Game Modes */}
+        <div className="flex flex-col lg:flex-row gap-4 items-center justify-center w-full lg:w-auto">
           <Link
             href="/cez/offline"
+            className="w-full lg:w-auto"
           >
             <p className="text-xl font-bold text-center text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400">
-              Try Offline Beta
+              Offline
             </p>
           </Link>
           <Link
             href="/cez/ai"
+            className="w-full lg:w-auto"
           >
             <p className="text-xl font-bold text-center text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400">
               Against AI
             </p>
           </Link>
-          <button disabled={true}  className="group">
+          <button
+            disabled={true} 
+            className="w-full lg:w-auto group"
+          >
             <p className="text-xl font-bold text-center text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400 group-disabled:border-zinc-900 group-disabled:text-zinc-500">
               Online (Soon)
             </p>
           </button>
         </div>
-        <div className="flex flex-col lg:px-72 pb-24">
-          <h2 className="text-3xl font-bold text-start text-zinc-200 mt-6 lg:mt-6">
+
             Rules
           </h2>
           <p className="text-base font-normal text-start text-zinc-200 mt-6 lg:mt-6">
