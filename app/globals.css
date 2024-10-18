@@ -140,4 +140,3 @@ html {
 .sw-sith-button {
   @apply outline-none font-starjedi bg-black border-2 border-red-400 text-red-400 rounded-sm hover:bg-red-400 hover:text-black transition-colors
 }
-
