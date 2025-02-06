@@ -9,6 +9,10 @@ const font = PT_Mono({ weight: "400", subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "ITU AI",
   description: "Project hosting website of ITU Artificial Intelligence Club",
+  applicationName: "ITU AI",
+  generator: "Next.js",
+  keywords: ["ITU", "AI", "Artificial Intelligence", "Projects"],
+  robots: "index, follow",
 };
 
 export default function RootLayout({
