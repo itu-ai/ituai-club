@@ -144,7 +144,7 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
           </button>
           <button className="w-24 text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400"
             onClick={() => setDifficulty(3)}
-            style={{ borderColor: difficulty === 2 ? '#ffffff' : '#555' }}
+            style={{ borderColor: difficulty === 3 ? '#ffffff' : '#555' }}
           >
             Hard
           </button>
