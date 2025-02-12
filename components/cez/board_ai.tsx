@@ -33,7 +33,7 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
     isWhitesTurn: true,
     moveHistory: [],
   });
-  const [depth, setDepth] = useState<number>(3);
+  const [difficulty, setDifficulty] = useState<number>(1);
 
   const drawBoard = () => {
     const canvas = canvasRef.current;
@@ -47,7 +47,7 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
     if (gameStats.isGameOver) return;
     try {
       const fen = grid.getFEN();
-      const data = await ApiService.getCezAIMove(fen, depth);
+      const data = await ApiService.getCezAIMove(fen, difficulty);
       const from = { x: data.from_.column, y: data.from_.row };
       const to = { x: data.to.column, y: data.to.row };
       const capture = data.capture ? { x: data.capture.column, y: data.capture.row } : null;
@@ -128,23 +128,23 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
       />
       {/* Game Controls */}
       <div className="flex flex-col w-full h-auto lg:w-[24rem] lg:h-full items-start justify-start gap-4">
-        {/* AI Min-Max Algorihm Depth */}
+        {/* AI Min-Max Algorihm Difficulty */}
         <div className="w-full flex flex-col gap-y-2 items-start">
           <button className="w-24 text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400"
-            onClick={() => setDepth(3)}
-            style={{ borderColor: depth === 3 ? '#ffffff' : '#555' }}
+            onClick={() => setDifficulty(1)}
+            style={{ borderColor: difficulty === 1 ? '#ffffff' : '#555' }}
           >
             Easy
           </button>
           <button className="w-24 text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400"
-            onClick={() => setDepth(5)}
-            style={{ borderColor: depth === 5 ? '#ffffff' : '#555' }}
+            onClick={() => setDifficulty(2)}
+            style={{ borderColor: difficulty === 2 ? '#ffffff' : '#555' }}
           >
             Medium
           </button>
           <button className="w-24 text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400"
-            onClick={() => setDepth(6)}
-            style={{ borderColor: depth === 6 ? '#ffffff' : '#555' }}
+            onClick={() => setDifficulty(3)}
+            style={{ borderColor: difficulty === 2 ? '#ffffff' : '#555' }}
           >
             Hard
           </button>
