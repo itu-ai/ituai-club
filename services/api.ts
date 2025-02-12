@@ -122,7 +122,7 @@ export class ApiService {
     // Cez Requests
 
     static async getCezAIMove(fen: string, difficulty: number) {
-      const url = `${CEZ_API_URL}/api/cez/ai/calculate`;
+      const url = `${CEZ_API_URL}/api/jazz/ai/calculate`;
       const headers = new Headers();
       headers.append('Content-Type', 'application/json');
       const body = JSON.stringify({ fen: fen, difficulty: difficulty });
