@@ -20,6 +20,12 @@ interface GameStats {
   moveHistory: Move[];
 }
 
+const moveToNotation = (move: Move): string => {
+  const from = String.fromCharCode(97 + move.from.x) + (8 - move.from.y);
+  const to = String.fromCharCode(97 + move.to.x) + (8 - move.to.y);
+  return `${from}-${to}`;
+}
+
 export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 }) => {
   // canvas variabels
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -35,6 +41,16 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
   });
   const [difficulty, setDifficulty] = useState<number>(1);
 
+  const restartGame = () => {
+    setGrid(new Grid());
+    setGameStats({
+      isGameOver: false,
+      winnerSide: 'none',
+      isWhitesTurn: true,
+      moveHistory: [],
+    });
+  }
+
   const drawBoard = () => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext('2d');
@@ -44,7 +60,7 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
   }
 
   const requestAIMove = async () => {
-    if (gameStats.isGameOver) return;
+    if (gameStats.isGameOver || grid.isGameOver) return;
     try {
       const fen = grid.getFEN();
       const data = await ApiService.getCezAIMove(fen, difficulty);
@@ -89,7 +105,7 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
   }
 
   const handleMouseDown = (e: React.MouseEvent<HTMLCanvasElement>) => {
-    if (is_player_white && !grid.isWhitesTurn) return;
+    if (is_player_white && !grid.isWhitesTurn && grid.isGameOver) return;
     // get the square/tile the mouse is in
     const { x, y } = mouseToTile(e.nativeEvent.offsetX, e.nativeEvent.offsetY, tile_size);
     const hitTile = grid.grid[x][y];
@@ -128,27 +144,38 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
       />
       {/* Game Controls */}
       <div className="flex flex-col w-full h-auto lg:w-[24rem] lg:h-full items-start justify-start gap-4">
-        {/* AI Min-Max Algorihm Difficulty */}
-        <div className="w-full flex flex-col gap-y-2 items-start">
-          <button className="w-24 text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400"
-            onClick={() => setDifficulty(1)}
-            style={{ borderColor: difficulty === 1 ? '#ffffff' : '#555' }}
-          >
-            Easy
-          </button>
-          <button className="w-24 text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400"
-            onClick={() => setDifficulty(2)}
-            style={{ borderColor: difficulty === 2 ? '#ffffff' : '#555' }}
-          >
-            Medium
-          </button>
-          <button className="w-24 text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400"
-            onClick={() => setDifficulty(3)}
-            style={{ borderColor: difficulty === 3 ? '#ffffff' : '#555' }}
-          >
-            Hard
-          </button>
-        </div>
+        {!gameStats.isGameOver ?
+          <div className="w-full flex flex-col gap-y-2 items-start">
+            {/* AI Min-Max Algorihm Difficulty */}
+            <button className="w-24 text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400"
+              onClick={() => setDifficulty(1)}
+              style={{ borderColor: difficulty === 1 ? '#ffffff' : '#555' }}
+            >
+              Easy
+            </button>
+            <button className="w-24 text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400"
+              onClick={() => setDifficulty(2)}
+              style={{ borderColor: difficulty === 2 ? '#ffffff' : '#555' }}
+            >
+              Medium
+            </button>
+            <button className="w-24 text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400"
+              onClick={() => setDifficulty(3)}
+              style={{ borderColor: difficulty === 3 ? '#ffffff' : '#555' }}
+            >
+              Hard
+            </button>
+          </div>
+          :
+          <div className="w-full flex flex-col gap-y-2 items-start">
+            {/* Restart Game */}
+            <button className="w-24 text-zinc-300 px-4 py-2 border-2 border-zinc-700 rounded-xl hover:border-zinc-800 hover:text-zinc-400"
+              onClick={restartGame}
+            >
+              Restart
+            </button>
+          </div>
+        }
         {!gameStats.isGameOver &&
           <>
             <p className="text-start font-medium text-zinc-300">
@@ -172,7 +199,7 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
               if (index % 2 === 0) {
                 return (
                   <p className="text-start font-light text-zinc-300" key={index}>
-                    {`${index + 1}. ${move.from.x},${move.from.y} to ${move.to.x},${move.to.y}`}
+                    {`${index / 2 + 1}. ${moveToNotation(move)}`}
                   </p>
                 );
               }
@@ -186,7 +213,7 @@ export const CezBoardAI: React.FC<Props> = ({ is_player_white, board_size = 720 
               if (index % 2 === 1) {
                 return (
                   <p className="text-start font-light text-zinc-300" key={index}>
-                    {`${index + 1}. ${move.from.x},${move.from.y} to ${move.to.x},${move.to.y}`}
+                    {`${moveToNotation(move)}`}
                   </p>
                 );
               }
